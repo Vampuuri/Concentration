@@ -1,75 +1,83 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Card from './Card';
+import {generateValues, getBoardDimensions} from '../helpers/Generator';
 
 export default class Board extends React.Component {
     constructor(props) {
         super(props)
 
-        console.log(this.props.pairs);
+        this.initializeInformation = this.initializeInformation.bind(this);
+        this.makeBoard = this.makeBoard.bind(this);
 
+        this.state = {pairs: this.props.pairs, values: [], rows: 0, cols: 0};
+    }
+
+    initializeInformation() {
         var pairs = this.props.pairs;
 
         if (pairs > 18) {
             pairs == 18;
-        } else if (pairs < 8) {
-            pairs == 8;
+        } else if (pairs < 4) {
+            pairs == 4;
         }
 
-        this.makeBoard = this.makeBoard.bind(this);
+        var dimensions = getBoardDimensions(pairs);
+        var rows = dimensions.rows;
+        var cols = dimensions.cols;
 
-        this.state = {values: ['A', 'B', 'C', 'D'], pairs: pairs};
+        this.setState({pairs: pairs, rows: rows, cols: cols})
     }
 
     makeBoard() {
         return (<View style={styles.row}>
             <View style={styles.column}>
-                <Card symbol={this.state.values[0]}/>
-                <Card symbol={this.state.values[1]}/>
-                <Card symbol={this.state.values[0]}/>
-                <Card symbol={this.state.values[1]}/>
-                <Card symbol={this.state.values[0]}/>
-                <Card symbol={this.state.values[1]}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
             </View>
             <View style={styles.column}>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
             </View>
             <View style={styles.column}>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
             </View>
             <View style={styles.column}>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
             </View>
             <View style={styles.column}>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
             </View>
             <View style={styles.column}>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
-                <Card symbol={this.state.values[2]}/>
-                <Card symbol={this.state.values[3]}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
+                <Card symbol={1}/>
             </View>
         </View>);
     }
