@@ -6,6 +6,8 @@ export default class Board extends React.Component {
     constructor(props) {
         super(props)
 
+        console.log(this.props.pairs)
+
         this.makeBoard = this.makeBoard.bind(this);
 
         this.state = {values: ['A', 'B', 'C', 'D']};
@@ -16,8 +18,48 @@ export default class Board extends React.Component {
             <View style={styles.column}>
                 <Card symbol={this.state.values[0]}/>
                 <Card symbol={this.state.values[1]}/>
+                <Card symbol={this.state.values[0]}/>
+                <Card symbol={this.state.values[1]}/>
+                <Card symbol={this.state.values[0]}/>
+                <Card symbol={this.state.values[1]}/>
             </View>
             <View style={styles.column}>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+            </View>
+            <View style={styles.column}>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+            </View>
+            <View style={styles.column}>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+            </View>
+            <View style={styles.column}>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+            </View>
+            <View style={styles.column}>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
+                <Card symbol={this.state.values[2]}/>
+                <Card symbol={this.state.values[3]}/>
                 <Card symbol={this.state.values[2]}/>
                 <Card symbol={this.state.values[3]}/>
             </View>
