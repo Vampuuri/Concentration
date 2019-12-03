@@ -6,11 +6,19 @@ export default class Board extends React.Component {
     constructor(props) {
         super(props)
 
-        console.log(this.props.pairs)
+        console.log(this.props.pairs);
+
+        var pairs = this.props.pairs;
+
+        if (pairs > 18) {
+            pairs == 18;
+        } else if (pairs < 8) {
+            pairs == 8;
+        }
 
         this.makeBoard = this.makeBoard.bind(this);
 
-        this.state = {values: ['A', 'B', 'C', 'D']};
+        this.state = {values: ['A', 'B', 'C', 'D'], pairs: pairs};
     }
 
     makeBoard() {
