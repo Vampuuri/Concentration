@@ -13,6 +13,10 @@ export default class Board extends React.Component {
         this.state = {pairs: this.props.pairs, values: [], rows: 0, cols: 0};
     }
 
+    componentDidMount() {
+        this.initializeInformation();
+    }
+
     initializeInformation() {
         var pairs = this.props.pairs;
 
@@ -30,6 +34,23 @@ export default class Board extends React.Component {
     }
 
     makeBoard() {
+        var board = [];
+
+        if (this.state.rows <= 3) {
+            for (var i = 0; i < this.state.rows; i++) {
+                var itemsInRow = [];
+
+                for (var j = 0; j < this.state.cols; j++) {
+                    itemsInRow.push(<Card key={i*this.state.cols + j} symbol={1}/>);
+                }
+
+                board.push(<View key={i} style={styles.column}>{itemsInRow}</View>);
+            }
+        }
+
+        return (<View style={styles.row}>{board}</View>);
+
+        /**
         return (<View style={styles.row}>
             <View style={styles.column}>
                 <Card symbol={1}/>
@@ -79,7 +100,7 @@ export default class Board extends React.Component {
                 <Card symbol={1}/>
                 <Card symbol={1}/>
             </View>
-        </View>);
+        </View>);*/
     }
 
     render() {
