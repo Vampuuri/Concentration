@@ -1,4 +1,7 @@
-class Generator {
+const possibleValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+export default class Generator {
+
     generateValues(numberOfPairs) {
         values = [];
 
