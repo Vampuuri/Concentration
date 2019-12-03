@@ -2,8 +2,26 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default class Card extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.generateCard = this.generateCard.bind(this);
+
+        this.state = {active: false};
+    }
+
+    generateCard(active) {
+        if (active) {
+            return(<View style={styles.container_active}>
+               <Text>Card</Text>
+            </View>);
+        } else {
+            return(<View style={styles.container_hidden}></View>);
+        }
+    }
+
     render() {
-        return (<View style={styles.container_active}><Text>Card</Text></View>);
+        return (<View>{this.generateCard(this.state.active)}</View>);
     }
 }
 
