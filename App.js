@@ -7,7 +7,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Board pairs={15}/>
+        <Board pairs={6}/>
       </View>
     );
   }
