@@ -13,11 +13,11 @@ export default class Card extends React.Component {
 
     generateCard(active) {
         if (active) {
-            return(<View style={styles.container_active}>
+            return(<View style={[styles.container, styles.active]}>
                <Text>Card</Text>
             </View>);
         } else {
-            return(<View style={styles.container_hidden}></View>);
+            return(<View style={[styles.container, styles.hidden]}></View>);
         }
     }
 
@@ -32,24 +32,19 @@ export default class Card extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container_active: {
-    backgroundColor: '#fff',
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
     borderStyle: 'solid',
     borderColor: 'black',
     borderWidth: 1,
     width: 50,
-    height: 50,
+    height: 65,
   },
-  container_hidden: {
+  active: {
+    backgroundColor: '#fff',
+  },
+  hidden: {
     backgroundColor: 'grey',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderStyle: 'solid',
-    borderColor: 'black',
-    borderWidth: 1,
-    width: 50,
-    height: 50,
     },
 });
