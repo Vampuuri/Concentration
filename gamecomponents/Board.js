@@ -7,7 +7,7 @@ export default class Board extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Card/>
+        <Card symbol="A"/>
       </View>
     );
   }

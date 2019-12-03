@@ -14,7 +14,7 @@ export default class Card extends React.Component {
     generateCard(active) {
         if (active) {
             return(<View style={[styles.container, styles.active]}>
-               <Text>Card</Text>
+               <Text>{this.props.symbol}</Text>
             </View>);
         } else {
             return(<View style={[styles.container, styles.hidden]}></View>);
