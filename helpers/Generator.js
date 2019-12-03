@@ -1,17 +1,22 @@
 const possibleValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-export default class Generator {
+export function generateValues(numberOfPairs) {
+    var values = [];
 
-    generateValues(numberOfPairs) {
-        values = [];
+    while (values.length < numberOfPairs) {
+        var character = possibleValues.charAt(Math.floor(Math.random()*possibleValues.length))
 
-        return values;
+        values.push(character)
     }
 
-    getBoardMapping(numberOfPairs) {
-        rows = 0;
-        cols = 0;
+    console.log(values)
 
-        return {rows: rows, cols: cols}
-    }
+    return values;
+}
+
+export function getBoardMapping(numberOfPairs) {
+    rows = 0;
+    cols = 0;
+
+    return {rows: rows, cols: cols}
 }
