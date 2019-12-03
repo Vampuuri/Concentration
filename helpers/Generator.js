@@ -16,7 +16,7 @@ export function generateValues(numberOfPairs) {
     return values;
 }
 
-export function getBoardMapping(numberOfPairs) {
+export function getBoardDimensions(numberOfPairs) {
     rows = 0;
     cols = 0;
 
@@ -26,12 +26,6 @@ export function getBoardMapping(numberOfPairs) {
     } else if (numberOfPairs == 6) {
         rows = 3;
         cols = 4;
-    } else if (numberOfPairs == 7) {
-        rows = 3;
-        cols = 5;
-    } else if (numberOfPairs < 10) {
-        rows = 3;
-        cols = 6;
     } else if (numberOfPairs < 13) {
         rows = 4;
         cols = 6;
