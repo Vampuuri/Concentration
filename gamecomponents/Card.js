@@ -1,11 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Card extends React.Component {
     constructor(props) {
         super(props);
 
         this.generateCard = this.generateCard.bind(this);
+        this.flipCard = this.flipCard.bind(this);
 
         this.state = {active: false};
     }
@@ -20,8 +21,13 @@ export default class Card extends React.Component {
         }
     }
 
+    flipCard(event) {
+        console.log("switch state");
+        this.setState({active: !this.state.active});
+    }
+
     render() {
-        return (<View>{this.generateCard(this.state.active)}</View>);
+        return (<TouchableOpacity onPress={this.flipCard}>{this.generateCard(this.state.active)}</TouchableOpacity>);
     }
 }
 
@@ -37,7 +43,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   container_hidden: {
-    backgroundColor: 'black',
+    backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
     borderStyle: 'solid',
