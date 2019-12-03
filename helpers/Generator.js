@@ -20,6 +20,26 @@ export function getBoardMapping(numberOfPairs) {
     rows = 0;
     cols = 0;
 
+    if (numberOfPairs < 6) {
+        rows = 2;
+        cols = numberOfPairs;
+    } else if (numberOfPairs == 6) {
+        rows = 3;
+        cols = 4;
+    } else if (numberOfPairs == 7) {
+        rows = 3;
+        cols = 5;
+    } else if (numberOfPairs < 10) {
+        rows = 3;
+        cols = 6;
+    } else if (numberOfPairs < 13) {
+        rows = 4;
+        cols = 6;
+    } else {
+        rows = 6;
+        cols = 6;
+    }
+
     return {rows: rows, cols: cols}
 }
 
