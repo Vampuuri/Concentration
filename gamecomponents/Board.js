@@ -42,7 +42,7 @@ export default class Board extends React.Component {
                         invisible[cardKey] = true;
                         invisible[this.state.flippedCard.key] = true;
 
-                        this.setState({invisible: invisible, enableFlipping: true, flippedCard: {key: -1, value: null}})
+                        this.setState({invisible: invisible, enableFlipping: true, flippedCard: {key: -1, value: null}, score: this.state.score + 1})
                     } else {
                         console.log("not a match")
                         this.setState({flippedCard: {key: -1, value: null}, refresh: true, enableFlipping: true}, () => this.setState({refresh: false}))
