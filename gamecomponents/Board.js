@@ -10,7 +10,7 @@ export default class Board extends React.Component {
         this.initializeInformation = this.initializeInformation.bind(this);
         this.makeBoard = this.makeBoard.bind(this);
 
-        this.state = {pairs: this.props.pairs, values: [], rows: 0, cols: 0};
+        this.state = {pairs: this.props.pairs, values: [], rows: 0, cols: 0, invisible: []};
     }
 
     componentDidMount() {
@@ -31,7 +31,13 @@ export default class Board extends React.Component {
         var cols = dimensions.cols;
         var values = generateValues(pairs);
 
-        this.setState({pairs: pairs, values: values, rows: rows, cols: cols})
+        var invisible = []
+
+        for (var i = 0; i < pairs; i++) {
+            invisible.push(false);
+        }
+
+        this.setState({pairs: pairs, values: values, rows: rows, cols: cols, invisible: invisible})
     }
 
     makeBoard() {
