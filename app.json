@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "fi.tamk.esuppo",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "fi.tamk.esuppo"
     }
   }
 }
