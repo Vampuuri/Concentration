@@ -127,13 +127,13 @@ export default class Board extends React.Component {
             }
         }
 
-        return (<View style={styles.row}>{board}</View>);
+    return (<View style={styles.row}>{board}</View>);
     }
 
     render() {
         return (
-            <View>
-                <Text>{this.state.score}</Text>
+            <View> 
+                <View style={styles.scorecontainer}><Text style={styles.score}>{this.state.score}</Text></View>
                 {this.makeBoard()}
             </View>
         );
@@ -148,5 +148,12 @@ const styles = StyleSheet.create({
   },
   column: {
     flexDirection: 'row',
+  },
+  scorecontainer: {
+    marginTop:70,
+    alignItems: 'center',
+  },
+  score: {
+    fontSize:20,
   }
 });
