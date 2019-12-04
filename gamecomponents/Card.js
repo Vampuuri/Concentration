@@ -8,7 +8,12 @@ export default class Card extends React.Component {
         this.generateCard = this.generateCard.bind(this);
         this.flipCard = this.flipCard.bind(this);
 
-        this.state = {active: false, invisible: false};
+        this.state = {active: false, invisible: false, enabled: true};
+    }
+
+    componentWillReceiveProps(newprops) {
+        console.log(newprops)
+        this.setState({invisible: newprops.invisible, enabled: newprops.enabled});
     }
 
     generateCard(active) {
@@ -24,7 +29,10 @@ export default class Card extends React.Component {
     }
 
     flipCard(event) {
-        this.setState({active: true});
+        if (this.state.enabled) {
+            this.setState({active: true});
+            this.props.returnvalues(this.props.id, this.props.symbol);
+        }
     }
 
     render() {
