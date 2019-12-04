@@ -17,7 +17,9 @@ export default class Board extends React.Component {
             , cols: 0
             , invisible: []
             , enableFlipping: true
-            , flippedCard: {key: -1, value: null}};
+            , flippedCard: {key: -1, value: null}
+            , refresh: false
+            , score: 0};
     }
 
     componentDidMount() {
@@ -36,14 +38,14 @@ export default class Board extends React.Component {
                 setTimeout(() => {
                     if (cardValue === this.state.flippedCard.value) {
                         console.log("the cards match!")
-                        var invisible = this.state.invisible.map(l => Object.assign({}, l))
-                        invisible[cardKey] = false;
-                        invisible[this.state.flippedCard.key] = false;
+                        var invisible = [...this.state.invisible]
+                        invisible[cardKey] = true;
+                        invisible[this.state.flippedCard.key] = true;
 
                         this.setState({invisible: invisible, enableFlipping: true, flippedCard: {key: -1, value: null}})
                     } else {
-                        console.log("not a macth")
-                        // PIILOTA KORTIT UUDESTAAN 
+                        console.log("not a match")
+                        this.setState({flippedCard: {key: -1, value: null}, refresh: true, enableFlipping: true}, () => this.setState({refresh: false}))
                     }
                 }, 1000)
             })
@@ -88,7 +90,8 @@ export default class Board extends React.Component {
                         invisible={this.state.invisible[keyCounter]}
                         enabled={this.state.enableFlipping}
                         symbol={this.state.values[keyCounter]}
-                        returnvalues={this.receiveCardInfo}/>);
+                        returnvalues={this.receiveCardInfo}
+                        refresh={this.state.refresh}/>);
                     keyCounter++;
                 }
 
@@ -115,7 +118,8 @@ export default class Board extends React.Component {
                         invisible={this.state.invisible[keyCounter]}
                         enabled={this.state.enableFlipping}
                         symbol={this.state.values[keyCounter]}
-                        returnvalues={this.receiveCardInfo}/>);
+                        returnvalues={this.receiveCardInfo}
+                        refresh={this.state.refresh}/>);
                     keyCounter++;
                 }
 
@@ -129,6 +133,7 @@ export default class Board extends React.Component {
     render() {
         return (
             <View>
+                <Text>{this.state.score}</Text>
                 {this.makeBoard()}
             </View>
         );
