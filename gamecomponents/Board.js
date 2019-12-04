@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import Card from './Card';
 import {generateValues, getBoardDimensions} from '../helpers/Generator';
 
@@ -10,8 +10,10 @@ export default class Board extends React.Component {
         this.initializeInformation = this.initializeInformation.bind(this);
         this.makeBoard = this.makeBoard.bind(this);
         this.receiveCardInfo = this.receiveCardInfo.bind(this);
+        this.checkWin = this.checkWin.bind(this);
 
         this.state = {pairs: this.props.pairs
+            , matchedPairs: 0
             , values: []
             , rows: 0
             , cols: 0
@@ -42,13 +44,33 @@ export default class Board extends React.Component {
                         invisible[cardKey] = true;
                         invisible[this.state.flippedCard.key] = true;
 
-                        this.setState({invisible: invisible, enableFlipping: true, flippedCard: {key: -1, value: null}, score: this.state.score + 1})
+                        this.setState({invisible: invisible
+                            , enableFlipping: true
+                            , flippedCard: {key: -1, value: null}
+                            , score: this.state.score + 1
+                            , matchedPairs: this.state.matchedPairs + 1}, () => this.checkWin())
                     } else {
                         console.log("not a match")
-                        this.setState({flippedCard: {key: -1, value: null}, refresh: true, enableFlipping: true}, () => this.setState({refresh: false}))
+                        this.setState({flippedCard: {key: -1, value: null}
+                            , refresh: true
+                            , enableFlipping: true},
+                            () => this.setState({refresh: false}))
                     }
                 }, 1000)
             })
+        }
+    }
+
+    checkWin() {
+        if (this.state.pairs === this.state.matchedPairs) {
+            Alert.alert(
+                'You won!',
+                'Your score: ' + this.state.score,
+                [
+                  {text: 'OK', onPress: () => console.log('OK Pressed')},
+                ],
+                {cancelable: false},
+              );
         }
     }
 
