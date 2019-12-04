@@ -29,26 +29,31 @@ export default class Board extends React.Component {
         var dimensions = getBoardDimensions(pairs);
         var rows = dimensions.rows;
         var cols = dimensions.cols;
+        var values = generateValues(pairs);
 
-        this.setState({pairs: pairs, rows: rows, cols: cols})
+        this.setState({pairs: pairs, values: values, rows: rows, cols: cols})
     }
 
     makeBoard() {
         var board = [];
 
         if (this.state.rows <= 3) {
+            keyCounter = 0;
+
             for (var i = 0; i < this.state.rows; i++) {
                 var itemsInRow = [];
 
                 for (var j = 0; j < this.state.cols; j++) {
-                    itemsInRow.push(<Card key={i*this.state.cols + j} symbol={1}/>);
+                    itemsInRow.push(<Card key={keyCounter} symbol={this.state.values[keyCounter]}/>);
+                    keyCounter++;
                 }
 
                 board.push(<View key={i} style={styles.column}>{itemsInRow}</View>);
             }
         } else {
             var goesOver = this.state.pairs - (this.state.cols * (this.state.rows - 2))/2;
-            
+            keyCounter = 0;
+
             for (var i = 0; i < this.state.rows; i++) {
                 var colCounter;
 
@@ -61,7 +66,8 @@ export default class Board extends React.Component {
                 var itemsInRow = [];
 
                 for (var j = 0; j < colCounter; j++) {
-                    itemsInRow.push(<Card key={i*this.state.cols + j} symbol={1}/>);
+                    itemsInRow.push(<Card key={keyCounter} symbol={this.state.values[keyCounter]}/>);
+                    keyCounter++;
                 }
 
                 board.push(<View key={i} style={styles.column}>{itemsInRow}</View>);
