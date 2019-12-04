@@ -9,12 +9,45 @@ export default class Board extends React.Component {
 
         this.initializeInformation = this.initializeInformation.bind(this);
         this.makeBoard = this.makeBoard.bind(this);
+        this.receiveCardInfo = this.receiveCardInfo.bind(this);
 
-        this.state = {pairs: this.props.pairs, values: [], rows: 0, cols: 0, invisible: []};
+        this.state = {pairs: this.props.pairs
+            , values: []
+            , rows: 0
+            , cols: 0
+            , invisible: []
+            , enableFlipping: true
+            , flippedCard: {key: -1, value: null}};
     }
 
     componentDidMount() {
         this.initializeInformation();
+    }
+
+    receiveCardInfo(cardKey, cardValue) {
+        console.log("card flipped")
+
+        if (this.state.flippedCard.key === -1) {
+            console.log("add card to state")
+            this.setState({flippedCard: {key: cardKey, value: cardValue}})
+        } else if (this.state.flippedCard.key !== -1 && this.state.flippedCard.key !== cardKey) {
+            console.log("matching...")
+            this.setState({enableFlipping: false}, () => {
+                setTimeout(() => {
+                    if (cardValue === this.state.flippedCard.value) {
+                        console.log("the cards match!")
+                        var invisible = this.state.invisible.map(l => Object.assign({}, l))
+                        invisible[cardKey] = false;
+                        invisible[this.state.flippedCard.key] = false;
+
+                        this.setState({invisible: invisible, enableFlipping: true, flippedCard: {key: -1, value: null}})
+                    } else {
+                        console.log("not a macth")
+                        // PIILOTA KORTIT UUDESTAAN 
+                    }
+                }, 1000)
+            })
+        }
     }
 
     initializeInformation() {
@@ -33,7 +66,7 @@ export default class Board extends React.Component {
 
         var invisible = []
 
-        for (var i = 0; i < pairs; i++) {
+        for (var i = 0; i < pairs*2; i++) {
             invisible.push(false);
         }
 
@@ -50,7 +83,12 @@ export default class Board extends React.Component {
                 var itemsInRow = [];
 
                 for (var j = 0; j < this.state.cols; j++) {
-                    itemsInRow.push(<Card key={keyCounter} symbol={this.state.values[keyCounter]}/>);
+                    itemsInRow.push(<Card key={keyCounter}
+                        id={keyCounter}
+                        invisible={this.state.invisible[keyCounter]}
+                        enabled={this.state.enableFlipping}
+                        symbol={this.state.values[keyCounter]}
+                        returnvalues={this.receiveCardInfo}/>);
                     keyCounter++;
                 }
 
@@ -72,7 +110,12 @@ export default class Board extends React.Component {
                 var itemsInRow = [];
 
                 for (var j = 0; j < colCounter; j++) {
-                    itemsInRow.push(<Card key={keyCounter} symbol={this.state.values[keyCounter]}/>);
+                    itemsInRow.push(<Card key={keyCounter}
+                        id={keyCounter}
+                        invisible={this.state.invisible[keyCounter]}
+                        enabled={this.state.enableFlipping}
+                        symbol={this.state.values[keyCounter]}
+                        returnvalues={this.receiveCardInfo}/>);
                     keyCounter++;
                 }
 
