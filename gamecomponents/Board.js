@@ -11,6 +11,7 @@ export default class Board extends React.Component {
         this.makeBoard = this.makeBoard.bind(this);
         this.receiveCardInfo = this.receiveCardInfo.bind(this);
         this.checkWin = this.checkWin.bind(this);
+        this.reset = this.reset.bind(this);
 
         this.state = {pairs: this.props.pairs
             , matchedPairs: 0
@@ -67,11 +68,18 @@ export default class Board extends React.Component {
                 'You won!',
                 'Your score: ' + this.state.score,
                 [
-                  {text: 'OK', onPress: () => console.log('OK Pressed')},
+                  {text: 'Reset', onPress: () => this.reset()},
                 ],
                 {cancelable: false},
               );
         }
+    }
+
+    reset() {
+        console.log("reset")
+        this.setState({refresh: true, score: 0, matchedPairs: 0},
+            () => this.setState({refresh: false},
+                () => this.initializeInformation()))
     }
 
     initializeInformation() {
