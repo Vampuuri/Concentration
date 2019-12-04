@@ -11,7 +11,8 @@ export function generateValues(numberOfPairs) {
         }
     }
 
-    console.log(values)
+    values = [...values, ...values];
+    values = shuffle(values);
 
     return values;
 }
@@ -58,6 +59,6 @@ function shuffle(arr) {
         arr[i] = arr[j];
         arr[j] = temp;
     }
-    
-    return arr;    
+
+    return arr;
 };
