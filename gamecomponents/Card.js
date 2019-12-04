@@ -8,11 +8,13 @@ export default class Card extends React.Component {
         this.generateCard = this.generateCard.bind(this);
         this.flipCard = this.flipCard.bind(this);
 
-        this.state = {active: false};
+        this.state = {active: false, invisible: false};
     }
 
     generateCard(active) {
-        if (active) {
+        if (this.state.invisible) {
+            return(<View style={[styles.container, styles.invisible]}></View>);
+        } else if (active) {
             return(<View style={[styles.container, styles.active]}>
                <Text>{this.props.symbol}</Text>
             </View>);
@@ -22,8 +24,7 @@ export default class Card extends React.Component {
     }
 
     flipCard(event) {
-        console.log("switch state");
-        this.setState({active: !this.state.active});
+        this.setState({active: true});
     }
 
     render() {
@@ -48,5 +49,9 @@ const styles = StyleSheet.create({
   },
   hidden: {
     backgroundColor: 'grey',
-    },
+  },
+  invisible: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+  }
 });
