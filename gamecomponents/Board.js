@@ -46,61 +46,29 @@ export default class Board extends React.Component {
 
                 board.push(<View key={i} style={styles.column}>{itemsInRow}</View>);
             }
+        } else {
+            var goesOver = this.state.pairs - (this.state.cols * (this.state.rows - 2))/2;
+            
+            for (var i = 0; i < this.state.rows; i++) {
+                var colCounter;
+
+                if (i === 0 || i === this.state.rows - 1) {
+                    colCounter = goesOver;
+                } else {
+                    colCounter = this.state.cols;
+                }
+
+                var itemsInRow = [];
+
+                for (var j = 0; j < colCounter; j++) {
+                    itemsInRow.push(<Card key={i*this.state.cols + j} symbol={1}/>);
+                }
+
+                board.push(<View key={i} style={styles.column}>{itemsInRow}</View>);
+            }
         }
 
         return (<View style={styles.row}>{board}</View>);
-
-        /**
-        return (<View style={styles.row}>
-            <View style={styles.column}>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-            </View>
-            <View style={styles.column}>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-            </View>
-            <View style={styles.column}>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-            </View>
-            <View style={styles.column}>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-            </View>
-            <View style={styles.column}>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-            </View>
-            <View style={styles.column}>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-                <Card symbol={1}/>
-            </View>
-        </View>);*/
     }
 
     render() {
