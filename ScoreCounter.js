@@ -6,7 +6,18 @@ export default class ScoreCounter extends React.Component {
     constructor(props) {
         super(props)
 
+        this.machingSuccessful = this.machingSuccessful.bind(this);
+        this.matchingFailed = this.matchingFailed.bind(this);
+
         this.state = {score: 0, combo: 10}
+    }
+
+    machingSuccessful() {
+        console.log("match!");
+    }
+
+    matchingFailed() {
+        console.log("not a match!");
     }
 
     render() { 
