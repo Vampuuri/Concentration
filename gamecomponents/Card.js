@@ -12,7 +12,6 @@ export default class Card extends React.Component {
     }
 
     componentWillReceiveProps(newprops) {
-        console.log("card: new props received")
         if (newprops.refresh) {
             this.setState({invisible: newprops.invisible, enabled: newprops.enabled, active: false});
         } else {
