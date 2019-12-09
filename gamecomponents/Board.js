@@ -10,23 +10,28 @@ export default class Board extends React.Component {
         this.initializeInformation = this.initializeInformation.bind(this);
         this.makeBoard = this.makeBoard.bind(this);
         this.receiveCardInfo = this.receiveCardInfo.bind(this);
-        this.checkWin = this.checkWin.bind(this);
         this.reset = this.reset.bind(this);
 
         this.state = {pairs: this.props.pairs
-            , matchedPairs: 0
             , values: []
             , rows: 0
             , cols: 0
             , invisible: []
             , enableFlipping: true
             , flippedCard: {key: -1, value: null}
-            , refresh: false
-            , score: 0};
+            , refresh: false};
     }
 
     componentDidMount() {
         this.initializeInformation();
+    }
+
+    componentWillReceiveProps(newprops) {
+        if (newprops.resetBoard) {
+            this.setState({refresh: true, pairs: newprops.pairs},
+                () => this.setState({refresh: false},
+                    () => this.initializeInformation()))
+        }
     }
 
     receiveCardInfo(cardKey, cardValue) {
@@ -47,9 +52,7 @@ export default class Board extends React.Component {
 
                         this.setState({invisible: invisible
                             , enableFlipping: true
-                            , flippedCard: {key: -1, value: null}
-                            , score: this.state.score + 1
-                            , matchedPairs: this.state.matchedPairs + 1}, () => this.checkWin())
+                            , flippedCard: {key: -1, value: null}});
                     } else {
                         this.props.matchingFailed();
                         this.setState({flippedCard: {key: -1, value: null}
@@ -59,19 +62,6 @@ export default class Board extends React.Component {
                     }
                 }, 1000)
             })
-        }
-    }
-
-    checkWin() {
-        if (this.state.pairs === this.state.matchedPairs) {
-            Alert.alert(
-                'You won!',
-                'Your score: ' + this.state.score,
-                [
-                  {text: 'Reset', onPress: () => this.reset()},
-                ],
-                {cancelable: false},
-              );
         }
     }
 
@@ -163,7 +153,7 @@ export default class Board extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1}}> 
+            <View style={{flex: 1}}>
                 {this.makeBoard()}
             </View>
         );
