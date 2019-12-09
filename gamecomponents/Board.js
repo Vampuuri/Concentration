@@ -40,7 +40,7 @@ export default class Board extends React.Component {
             this.setState({enableFlipping: false}, () => {
                 setTimeout(() => {
                     if (cardValue === this.state.flippedCard.value) {
-                        console.log("the cards match!")
+                        this.props.matchingSuccessful();
                         var invisible = [...this.state.invisible]
                         invisible[cardKey] = true;
                         invisible[this.state.flippedCard.key] = true;
@@ -51,7 +51,7 @@ export default class Board extends React.Component {
                             , score: this.state.score + 1
                             , matchedPairs: this.state.matchedPairs + 1}, () => this.checkWin())
                     } else {
-                        console.log("not a match")
+                        this.props.matchingFailed();
                         this.setState({flippedCard: {key: -1, value: null}
                             , refresh: true
                             , enableFlipping: true},
