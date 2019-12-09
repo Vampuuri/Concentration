@@ -162,8 +162,7 @@ export default class Board extends React.Component {
 
     render() {
         return (
-            <View> 
-                <View style={styles.scorecontainer}><Text style={styles.score}>{this.state.score}</Text></View>
+            <View style={{flex: 1}}> 
                 {this.makeBoard()}
             </View>
         );
@@ -175,6 +174,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'column',
   },
   column: {
     flexDirection: 'row',
