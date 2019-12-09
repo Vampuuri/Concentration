@@ -38,7 +38,8 @@ export default class ScoreCounter extends React.Component {
                 </View>
                 <Board pairs={9}
                     matchingSuccessful={this.matchingSuccessful}
-                    matchingFailed={this.matchingFailed}/>
+                    matchingFailed={this.matchingFailed}
+                    resetScoring={this.reset}/>
             </View>
         );
     }

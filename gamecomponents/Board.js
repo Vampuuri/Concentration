@@ -77,6 +77,7 @@ export default class Board extends React.Component {
 
     reset() {
         console.log("reset")
+        this.props.resetScoring();
         this.setState({refresh: true, score: 0, matchedPairs: 0},
             () => this.setState({refresh: false},
                 () => this.initializeInformation()))
