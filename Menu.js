@@ -16,7 +16,7 @@ export default class Menu extends React.Component {
 
     playClicked() {
         console.log("play");
-        this.setState({show: <ScoreCounter/>});
+        this.setState({show: <ScoreCounter stopPlaying={this.stopPlaying}/>});
     }
 
     stopPlaying() {
