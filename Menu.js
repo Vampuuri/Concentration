@@ -1,24 +1,28 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import ScoreCounter from './ScoreCounter';
 
 export default class Menu extends React.Component {
     constructor(props) {
         super(props);
 
         this.playClicked = this.playClicked.bind(this)
+
+        this.state={show: <TouchableOpacity onPress={this.playClicked}>
+                <Text>Play</Text>
+            </TouchableOpacity>}
     }
 
     playClicked() {
-        console.log("play")
+        console.log("play");
+        this.setState({show: <ScoreCounter/>});
     }
 
     render() { 
         return (
-            <TouchableOpacity onPress={this.playClicked}>
-                <View style={styles.container}>
-                    <Text>Play</Text>
-                </View>
-            </TouchableOpacity>
+            <View style={styles.container}>
+                {this.state.show}
+            </View>
         );
     }
 }
