@@ -3,67 +3,34 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class ScoreCounter extends React.Component {
     render() { 
-        if (this.props.win) {
-            return (
-                <View>
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.titleText}>You won!</Text>
-                    </View>
+        return (
+            <View style={styles.container}>
+                <View style={styles.titleContainer}>
+                <Text style={styles.titleText}>{this.props.win ? "You won!" : "Too bad!"}</Text>
+                </View>
+                {this.props.win ?
                     <View style={styles.scoreContainer}>
                         <Text>Your score was:</Text>
                         <Text>{this.props.score}</Text>
                     </View>
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={this.props.stopPlaying}>
-                            <View style={styles.button}><Text>Stop playing</Text></View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={this.props.reset}>
-                            <View style={styles.button}><Text>Try again</Text></View>
-                        </TouchableOpacity>
+                    :
+                    <View style={styles.scoreContainer}>
+                    {this.props.timer ?
+                        <Text>You ran out of time</Text>
+                        :
+                        <Text>You ran out of moves</Text>}
                     </View>
+                }
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity onPress={this.props.stopPlaying}>
+                        <View style={styles.button}><Text>Stop playing</Text></View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={this.props.reset}>
+                        <View style={styles.button}><Text>Try again</Text></View>
+                    </TouchableOpacity>
                 </View>
-            );
-        } else {
-            if (this.props.timer) {
-                return (
-                    <View>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.titleText}>Too bad!</Text>
-                        </View>
-                        <View style={styles.scoreContainer}>
-                            <Text>You ran out of time</Text>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity onPress={this.props.stopPlaying}>
-                                <View style={styles.button}><Text>Stop playing</Text></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.props.reset}>
-                                <View style={styles.button}><Text>Try again</Text></View>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                );
-            } else {
-                return (
-                    <View>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.titleText}>Too bad!</Text>
-                        </View>
-                        <View style={styles.scoreContainer}>
-                            <Text>You ran out of moves</Text>
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity onPress={this.props.stopPlaying}>
-                                <View style={styles.button}><Text>Stop playing</Text></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={this.props.reset}>
-                                <View style={styles.button}><Text>Try again</Text></View>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                );
-            }
-        }
+            </View>
+        );
     }
 }
 
@@ -72,7 +39,7 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       flexDirection: 'column',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     titleContainer: {
       alignItems: 'center',
