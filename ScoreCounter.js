@@ -40,6 +40,7 @@ export default class ScoreCounter extends React.Component {
                 'You won!',
                 'Your score: ' + this.state.score,
                 [
+                  {text: 'Stop playing', onPress: () => this.props.stopPlaying()},
                   {text: 'Reset', onPress: () => this.reset()},
                 ],
                 {cancelable: false},
