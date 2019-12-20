@@ -3,21 +3,55 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default class ScoreCounter extends React.Component {
     render() { 
-        return (
-            <View>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>You won!</Text>
+        if (this.props.win) {
+            return (
+                <View>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.titleText}>You won!</Text>
+                    </View>
+                    <View style={styles.scoreContainer}>
+                        <Text>Your score was:</Text>
+                        <Text>{this.props.score}</Text>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.button}><Text>Stop playing</Text></View>
+                        <View style={styles.button}><Text>Try again</Text></View>
+                    </View>
                 </View>
-                <View style={styles.scoreContainer}>
-                    <Text>Your score was:</Text>
-                    <Text>0</Text>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <View style={styles.button}><Text>Stop playing</Text></View>
-                    <View style={styles.button}><Text>Try again</Text></View>
-                </View>
-            </View>
-        );
+            );
+        } else {
+            if (this.props.timer) {
+                return (
+                    <View>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.titleText}>Too bad!</Text>
+                        </View>
+                        <View style={styles.scoreContainer}>
+                            <Text>You ran out of time</Text>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.button}><Text>Stop playing</Text></View>
+                            <View style={styles.button}><Text>Try again</Text></View>
+                        </View>
+                    </View>
+                );
+            } else {
+                return (
+                    <View>
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.titleText}>Too bad!</Text>
+                        </View>
+                        <View style={styles.scoreContainer}>
+                            <Text>You ran out of moves</Text>
+                        </View>
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.button}><Text>Stop playing</Text></View>
+                            <View style={styles.button}><Text>Try again</Text></View>
+                        </View>
+                    </View>
+                );
+            }
+        }
     }
 }
 
