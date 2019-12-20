@@ -64,7 +64,16 @@ export default class ScoreCounter extends React.Component {
     }
 
     checkWin() {
-        if (this.props.limitedMoves) {
+        if (this.props.limitedMoves && this.props.limitedTime) {
+            if (this.state.matchedPairs === this.state.pairs) {
+                clearInterval(this.interval)
+                this.setState({win: this.state.matchedPairs === this.state.pairs
+                    , score: this.state.score + this.state.timeLeft + this.state.movesLeft * 10
+                    , gameOver: this.state.movesLeft === 0});
+            } else {
+                this.setState({win: this.state.matchedPairs === this.state.pairs, gameOver: this.state.movesLeft === 0});
+            }
+        } else if (this.props.limitedMoves) {
             if (this.state.matchedPairs === this.state.pairs) {
                 this.setState({win: this.state.matchedPairs === this.state.pairs
                     , score: this.state.score + this.state.movesLeft * 10
