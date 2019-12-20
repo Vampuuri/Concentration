@@ -14,7 +14,10 @@ export default class Menu extends React.Component {
         this.createCustomGameMenu = this.createCustomGameMenu.bind(this);
         this.checkPairInput = this.checkPairInput.bind(this);
 
-        this.state = {show: <View></View>, customPairAmount: ''};
+        this.state = {show: <View></View>
+            , customPairAmount: ''
+            , customMoveLimit: ''
+            , customTimeLimit: ''};
     }
 
     componentDidMount() {
@@ -34,6 +37,8 @@ export default class Menu extends React.Component {
 
     checkPairInput() {
         var pairs = parseInt(this.state.customPairAmount)
+        var moves = parseInt(this.state.customMoveLimit)
+        var time = parseInt(this.state.customTimeLimit)
         if (pairs === NaN || pairs < 4 || pairs > 18) {
             Alert.alert(
                 'Bad input',
@@ -44,7 +49,21 @@ export default class Menu extends React.Component {
                 {cancelable: false},
               );
         } else {
-            this.playClicked(pairs);
+            var movelimitExists = moves !== NaN && moves > 0;
+            var timelimitExists = time !== NaN && time > 0;
+
+            console.log(movelimitExists)
+            console.log(moves)
+            console.log(timelimitExists)
+            console.log(time)
+
+            this.setState({show: <ScoreCounter
+                pairs={pairs}
+                stopPlaying={this.stopPlaying}
+                limitedMoves={movelimitExists}
+                moves={moves}
+                limitedTime={timelimitExists}
+                time={time}/>});
         }
     }
 
@@ -58,6 +77,17 @@ export default class Menu extends React.Component {
                 keyboardType="numeric"
                 onChange={(input) => this.setState({customPairAmount: input.nativeEvent.text})}
                 style={styles.customInput}/>
+            <Text>Move limit</Text>
+            <TextInput
+                keyboardType="numeric"
+                onChange={(input) => this.setState({customMoveLimit: input.nativeEvent.text})}
+                style={styles.customInput}/>
+            <Text>Time limit in seconds</Text>
+            <TextInput
+                keyboardType="numeric"
+                onChange={(input) => this.setState({customTimeLimit: input.nativeEvent.text})}
+                style={styles.customInput}/>
+            <Text>Leave limits empty or zero for no limits!</Text>
             <TouchableOpacity onPress={this.checkPairInput}>
                 <View style={styles.button}>
                     <Text>Play</Text>
@@ -110,7 +140,10 @@ export default class Menu extends React.Component {
     }
 
     stopPlaying() {
-        this.setState({show: this.createMainMenu()})
+        this.setState({show: this.createMainMenu()
+            , customPairAmount: ''
+            , customMoveLimit: ''
+            , customTimeLimit: ''})
     }
 
     render() { 
@@ -153,6 +186,7 @@ const styles = StyleSheet.create({
       customInput: {
         borderColor: 'black',
         borderWidth: 1,
+        marginBottom: 3,
       }
   });
   
