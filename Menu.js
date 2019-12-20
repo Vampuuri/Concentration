@@ -1,14 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
-import Board from './gamecomponents/Board'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class Menu extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.playClicked = this.playClicked.bind(this)
+    }
+
+    playClicked() {
+        console.log("play")
+    }
 
     render() { 
         return (
-            <View style={styles.container}>
-                <Text>Menu</Text>
-            </View>
+            <TouchableOpacity onPress={this.playClicked}>
+                <View style={styles.container}>
+                    <Text>Play</Text>
+                </View>
+            </TouchableOpacity>
         );
     }
 }
