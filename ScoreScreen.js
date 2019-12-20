@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class ScoreCounter extends React.Component {
     render() { 
@@ -14,8 +14,12 @@ export default class ScoreCounter extends React.Component {
                         <Text>{this.props.score}</Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <View style={styles.button}><Text>Stop playing</Text></View>
-                        <View style={styles.button}><Text>Try again</Text></View>
+                        <TouchableOpacity onPress={this.props.stopPlaying}>
+                            <View style={styles.button}><Text>Stop playing</Text></View>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={this.props.reset}>
+                            <View style={styles.button}><Text>Try again</Text></View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             );
@@ -30,8 +34,12 @@ export default class ScoreCounter extends React.Component {
                             <Text>You ran out of time</Text>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <View style={styles.button}><Text>Stop playing</Text></View>
-                            <View style={styles.button}><Text>Try again</Text></View>
+                            <TouchableOpacity onPress={this.props.stopPlaying}>
+                                <View style={styles.button}><Text>Stop playing</Text></View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.props.reset}>
+                                <View style={styles.button}><Text>Try again</Text></View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 );
@@ -45,8 +53,12 @@ export default class ScoreCounter extends React.Component {
                             <Text>You ran out of moves</Text>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <View style={styles.button}><Text>Stop playing</Text></View>
-                            <View style={styles.button}><Text>Try again</Text></View>
+                            <TouchableOpacity onPress={this.props.stopPlaying}>
+                                <View style={styles.button}><Text>Stop playing</Text></View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={this.props.reset}>
+                                <View style={styles.button}><Text>Try again</Text></View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 );
