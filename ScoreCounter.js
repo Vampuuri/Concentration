@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import Board from './gamecomponents/Board'
+import ScoreScreen from './ScoreScreen'
 
 export default class ScoreCounter extends React.Component {
     constructor(props) {
@@ -15,7 +16,8 @@ export default class ScoreCounter extends React.Component {
             , matchedPairs: 0
             , score: 0
             , combo: 10
-            , resetBoard: false}
+            , resetBoard: false
+            , win: false}
     }
 
     matchingSuccessful() {
@@ -34,18 +36,7 @@ export default class ScoreCounter extends React.Component {
     }
 
     checkWin() {
-        if (this.state.matchedPairs === this.state.pairs) {
-            console.log("voitto!")
-            Alert.alert(
-                'You won!',
-                'Your score: ' + this.state.score,
-                [
-                  {text: 'Stop playing', onPress: () => this.props.stopPlaying()},
-                  {text: 'Reset', onPress: () => this.reset()},
-                ],
-                {cancelable: false},
-              );
-        }
+        this.setState({win: this.state.matchedPairs === this.state.pairs});
     }
 
     reset() {
@@ -53,12 +44,24 @@ export default class ScoreCounter extends React.Component {
             , matchedPairs: 0
             , score: 0
             , combo: 10
-            , resetBoard: true}, () => this.setState({resetBoard: false}))
+            , resetBoard: true
+            , win: false}, () => this.setState({resetBoard: false}))
     }
 
     render() { 
         return (
-            <View style={styles.container}>
+            <View>
+            {this.state.win ?
+                <View style={styles.container}>
+                <ScoreScreen 
+                    win={true}
+                    score={this.state.score}
+                    timer={false}
+                    reset={() => this.reset()}
+                    stopPlaying={() => this.props.stopPlaying()}/>
+                </View> 
+                :
+                <View style={styles.container}>
                 <View style={styles.scorecontainer}>
                     <Text style={styles.score}>{this.state.score}</Text>
                 </View>
@@ -67,6 +70,8 @@ export default class ScoreCounter extends React.Component {
                     matchingFailed={this.matchingFailed}
                     resetScoring={this.reset}
                     resetBoard={this.state.resetBoard}/>
+                </View>
+            }
             </View>
         );
     }
@@ -84,6 +89,6 @@ const styles = StyleSheet.create({
       },
       score: {
         fontSize:20,
-      }
+      },
   });
   
