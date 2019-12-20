@@ -20,6 +20,21 @@ export default class ScoreCounter extends React.Component {
             , timeLeft: this.props.time
             , resetBoard: false
             , win: false}
+
+        this.interval = null;
+    }
+
+    componentDidMount() {
+        if (this.props.limitedTime) {
+            this.interval = setInterval(() => {
+                if (this.state.timeLeft > 0) {
+                    this.setState({timeLeft: this.state.timeLeft - 1});
+                } else {
+                    this.setState({gameOver: true}, () => clearInterval(this.interval));
+                }
+            }
+            , 1000);
+        }
     }
 
     matchingSuccessful() {
@@ -44,12 +59,30 @@ export default class ScoreCounter extends React.Component {
         }
 
         if (this.props.limitedMoves) {
-            this.setState({movesLeft: this.state.movesLeft - 1})
+            this.setState({movesLeft: this.state.movesLeft - 1}, this.checkWin)
         }
     }
 
     checkWin() {
-        this.setState({win: this.state.matchedPairs === this.state.pairs});
+        if (this.props.limitedMoves) {
+            if (this.state.matchedPairs === this.state.pairs) {
+                this.setState({win: this.state.matchedPairs === this.state.pairs
+                    , score: this.state.score + this.state.movesLeft * 10
+                    , gameOver: this.state.movesLeft === 0});
+            } else {
+                this.setState({win: this.state.matchedPairs === this.state.pairs, gameOver: this.state.movesLeft === 0});
+            }
+        } else if (this.props.limitedTime) {
+            if (this.state.matchedPairs === this.state.pairs) {
+                clearInterval(this.interval)
+                this.setState({win: this.state.matchedPairs === this.state.pairs
+                    , score: this.state.score + this.state.timeLeft});
+            } else {
+                this.setState({win: this.state.matchedPairs === this.state.pairs});
+            }
+        } else {
+            this.setState({win: this.state.matchedPairs === this.state.pairs});
+        }
     }
 
     reset() {
@@ -60,18 +93,19 @@ export default class ScoreCounter extends React.Component {
             , movesLeft: this.props.moves
             , timeLeft: this.props.time
             , resetBoard: true
-            , win: false}, () => this.setState({resetBoard: false}))
+            , win: false
+            , gameOver: false}, () => this.setState({resetBoard: false}, this.componentDidMount))
     }
 
     render() { 
         return (
             <View>
-            {this.state.win ?
+            {this.state.win || this.state.gameOver ?
                 <View style={styles.container}>
                 <ScoreScreen 
-                    win={true}
+                    win={this.state.win}
                     score={this.state.score}
-                    timer={false}
+                    timer={this.state.timeLeft === 0}
                     reset={() => this.reset()}
                     stopPlaying={() => this.props.stopPlaying()}/>
                 </View> 
