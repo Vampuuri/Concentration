@@ -12,7 +12,7 @@ export default class ScoreCounter extends React.Component {
         this.reset = this.reset.bind(this);
         this.checkWin = this.checkWin.bind(this);
 
-        this.state = {pairs: 4
+        this.state = {pairs: this.props.pairs
             , matchedPairs: 0
             , score: 0
             , combo: 10
@@ -40,7 +40,7 @@ export default class ScoreCounter extends React.Component {
     }
 
     reset() {
-        this.setState({pairs: this.state.pairs + 1
+        this.setState({pairs: this.state.pairs
             , matchedPairs: 0
             , score: 0
             , combo: 10
@@ -70,6 +70,13 @@ export default class ScoreCounter extends React.Component {
                     matchingFailed={this.matchingFailed}
                     resetScoring={this.reset}
                     resetBoard={this.state.resetBoard}/>
+                {this.props.limitedMoves || this.props.limitedTime ? 
+                    <View style={styles.scorecontainer}>
+                        {this.props.limitedTime ? <Text>Time left: </Text> : <View></View>}
+                        {this.props.limitedMoves ? <Text>Moves left: </Text> : <View></View>}
+                    </View>
+                    :
+                    <View></View>}
                 </View>
             }
             </View>
@@ -90,5 +97,6 @@ const styles = StyleSheet.create({
       score: {
         fontSize:20,
       },
+
   });
   
