@@ -6,16 +6,24 @@ export default class Menu extends React.Component {
     constructor(props) {
         super(props);
 
-        this.playClicked = this.playClicked.bind(this)
+        this.playClicked = this.playClicked.bind(this);
+        this.stopPlaying = this.stopPlaying.bind(this);
 
-        this.state={show: <TouchableOpacity onPress={this.playClicked}>
+        this.state = {show: <TouchableOpacity onPress={this.playClicked}>
                 <Text>Play</Text>
-            </TouchableOpacity>}
+            </TouchableOpacity>};
     }
 
     playClicked() {
         console.log("play");
         this.setState({show: <ScoreCounter/>});
+    }
+
+    stopPlaying() {
+        console.log("stop playing");
+        this.setState({show: <TouchableOpacity onPress={this.playClicked}>
+                <Text>Play</Text>
+            </TouchableOpacity>})
     }
 
     render() { 
