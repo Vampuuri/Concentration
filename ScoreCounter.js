@@ -16,6 +16,8 @@ export default class ScoreCounter extends React.Component {
             , matchedPairs: 0
             , score: 0
             , combo: 10
+            , movesLeft: this.props.moves
+            , timeLeft: this.props.time
             , resetBoard: false
             , win: false}
     }
@@ -23,15 +25,26 @@ export default class ScoreCounter extends React.Component {
     matchingSuccessful() {
         console.log("match!");
         var score = this.state.score + this.state.combo;
-        this.setState({score: score
-            , combo: 10
-            , matchedPairs: this.state.matchedPairs + 1}, () => this.checkWin())
+        if (this.props.limitedMoves) {
+            this.setState({score: score
+                , combo: 10
+                , movesLeft: this.state.movesLeft - 1
+                , matchedPairs: this.state.matchedPairs + 1}, () => this.checkWin())
+        } else {
+            this.setState({score: score
+                , combo: 10
+                , matchedPairs: this.state.matchedPairs + 1}, () => this.checkWin())
+        }
     }
 
     matchingFailed() {
         console.log("not a match!");
         if (this.state.combo > 1) {
             this.setState({combo: this.state.combo - 1})
+        }
+
+        if (this.props.limitedMoves) {
+            this.setState({movesLeft: this.state.movesLeft - 1})
         }
     }
 
@@ -44,6 +57,8 @@ export default class ScoreCounter extends React.Component {
             , matchedPairs: 0
             , score: 0
             , combo: 10
+            , movesLeft: this.props.moves
+            , timeLeft: this.props.time
             , resetBoard: true
             , win: false}, () => this.setState({resetBoard: false}))
     }
@@ -72,8 +87,8 @@ export default class ScoreCounter extends React.Component {
                     resetBoard={this.state.resetBoard}/>
                 {this.props.limitedMoves || this.props.limitedTime ? 
                     <View style={styles.scorecontainer}>
-                        {this.props.limitedTime ? <Text>Time left: </Text> : <View></View>}
-                        {this.props.limitedMoves ? <Text>Moves left: </Text> : <View></View>}
+                        {this.props.limitedTime ? <Text>Time left: {this.state.timeLeft}</Text> : <View></View>}
+                        {this.props.limitedMoves ? <Text>Moves left: {this.state.movesLeft}</Text> : <View></View>}
                     </View>
                     :
                     <View></View>}
