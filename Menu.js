@@ -18,6 +18,8 @@ export default class Menu extends React.Component {
         this.levelsClicked = this.levelsClicked.bind(this);
         this.playDifficultyClicked = this.playDifficultyClicked.bind(this);
         this.endlessClicked = this.endlessClicked.bind(this);
+        this.createEndlessMoveScreen = this.createEndlessMoveScreen.bind(this);
+        this.createEndlessTimedScreen = this.createEndlessTimedScreen.bind(this);
 
         this.state = {show: <View></View>
             , customPairAmount: ''
@@ -52,8 +54,10 @@ export default class Menu extends React.Component {
     endlessClicked(timetrial) {
         if (timetrial === true) {
             console.log("endless: timed")
+            this.setState({show: this.createEndlessTimedScreen()});
         } else {
             console.log("endless: move restrictions")
+            this.setState({show: this.createEndlessMoveScreen()});
         }
     }
 
@@ -115,6 +119,52 @@ export default class Menu extends React.Component {
                 style={styles.customInput}/>
             <Text>Leave limits empty or zero for no limits!</Text>
             <TouchableOpacity onPress={this.checkPairInput}>
+                <View style={styles.button}>
+                    <Text>Play</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.stopPlaying}>
+                <View style={styles.button}>
+                    <Text>Back</Text>
+                </View>
+            </TouchableOpacity>
+        </View>);
+    }
+
+    createEndlessTimedScreen() {
+        return (<View>
+            <View style={styles.titleContainer}>
+                <Text style={styles.titleText}>Endless (time)</Text>
+            </View>
+            <Text>You will start with XX seconds.</Text>
+            <Text>After every level difficulty will rise.</Text>
+            <Text>Beating level gives you XX more seconds.</Text>
+            <Text>The game ends when you run out of time.</Text>
+            <Text>Your current highscore: </Text>
+            <TouchableOpacity onPress={() => this.playClicked(6)}>
+                <View style={styles.button}>
+                    <Text>Play</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.stopPlaying}>
+                <View style={styles.button}>
+                    <Text>Back</Text>
+                </View>
+            </TouchableOpacity>
+        </View>);
+    }
+
+    createEndlessMoveScreen() {
+        return (<View>
+            <View style={styles.titleContainer}>
+                <Text style={styles.titleText}>Endless (moves)</Text>
+            </View>
+            <Text>You will start with XX moves.</Text>
+            <Text>After every level difficulty will rise.</Text>
+            <Text>Beating level gives you XX more moves.</Text>
+            <Text>The game ends when you run out of moves.</Text>
+            <Text>Your current highscore: </Text>
+            <TouchableOpacity onPress={() => this.playClicked(6)}>
                 <View style={styles.button}>
                     <Text>Play</Text>
                 </View>
