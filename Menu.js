@@ -15,6 +15,9 @@ export default class Menu extends React.Component {
         this.checkPairInput = this.checkPairInput.bind(this);
         this.createDifficultyMenu = this.createDifficultyMenu.bind(this);
         this.createLevelMenu = this.createDifficultyMenu.bind(this);
+        this.levelsClicked = this.levelsClicked.bind(this);
+        this.playDifficultyClicked = this.playDifficultyClicked.bind(this);
+        this.endlessClicked = this.endlessClicked.bind(this);
 
         this.state = {show: <View></View>
             , customPairAmount: ''
@@ -41,7 +44,7 @@ export default class Menu extends React.Component {
         console.log("levels")
     }
 
-    playClicked() {
+    playDifficultyClicked() {
         console.log("play difficulty")
     }
 
@@ -170,32 +173,32 @@ export default class Menu extends React.Component {
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Concentration</Text>
             </View>
-            <TouchableOpacity onPress={() => this.playClicked(4)}>
+            <TouchableOpacity onPress={this.levelsClicked}>
                 <View style={styles.button}>
                     <Text>Levels</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.playClicked(6)}>
+            <TouchableOpacity onPress={this.playDifficultyClicked}>
                 <View style={styles.button}>
                     <Text>Play difficulty</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.playClicked(10)}>
+            <TouchableOpacity onPress={() => this.endlessClicked(true)}>
                 <View style={styles.button}>
                     <Text>Endless (time)</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.playClicked(15)}>
+            <TouchableOpacity onPress={() => this.endlessClicked(false)}>
                 <View style={styles.button}>
                     <Text>Endless (moves)</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.playClicked(18)}>
+            <TouchableOpacity onPress={this.customGameClicked}>
                 <View style={styles.button}>
                     <Text>Custom game</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.customGameClicked}>
+            <TouchableOpacity onPress={this.highscoresClicked}>
                 <View style={styles.button}>
                     <Text>Highscores</Text>
                 </View>
