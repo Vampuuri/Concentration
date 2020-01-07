@@ -37,6 +37,26 @@ export default class Menu extends React.Component {
         this.setState({show: this.createCustomGameMenu()});
     }
 
+    levelsClicked() {
+        console.log("levels")
+    }
+
+    playClicked() {
+        console.log("play difficulty")
+    }
+
+    endlessClicked(timetrial) {
+        if (timetrial === true) {
+            console.log("endless: timed")
+        } else {
+            console.log("endless: move restrictions")
+        }
+    }
+
+    highscoresClicked() {
+        console.log("highscores")
+    }
+
     checkPairInput() {
         var pairs = parseInt(this.state.customPairAmount)
         var moves = parseInt(this.state.customMoveLimit)
