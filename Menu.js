@@ -137,42 +137,47 @@ export default class Menu extends React.Component {
                     <Text>Very hard (18 pairs)</Text>
                 </View>
             </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.stopPlaying()}>
+                <View style={styles.button}>
+                    <Text>Back</Text>
+                </View>
+            </TouchableOpacity>
             </View>);
     }
 
     createMainMenu() {
         return (<View>
             <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Choose difficulty</Text>
+                <Text style={styles.titleText}>Concentration</Text>
             </View>
             <TouchableOpacity onPress={() => this.playClicked(4)}>
                 <View style={styles.button}>
-                    <Text>Very Easy (4 pairs)</Text>
+                    <Text>Levels</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.playClicked(6)}>
                 <View style={styles.button}>
-                    <Text>Easy (6 pairs)</Text>
+                    <Text>Play difficulty</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.playClicked(10)}>
                 <View style={styles.button}>
-                    <Text>Medium (10 pairs)</Text>
+                    <Text>Endless (time)</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.playClicked(15)}>
                 <View style={styles.button}>
-                    <Text>Hard (15 pairs)</Text>
+                    <Text>Endless (moves)</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.playClicked(18)}>
                 <View style={styles.button}>
-                    <Text>Very hard (18 pairs)</Text>
+                    <Text>Custom game</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.customGameClicked}>
                 <View style={styles.button}>
-                    <Text>Custom</Text>
+                    <Text>Highscores</Text>
                 </View>
             </TouchableOpacity>
             </View>);
