@@ -13,6 +13,8 @@ export default class Menu extends React.Component {
         this.customGameClicked = this.customGameClicked.bind(this);
         this.createCustomGameMenu = this.createCustomGameMenu.bind(this);
         this.checkPairInput = this.checkPairInput.bind(this);
+        this.createDifficultyMenu = this.createDifficultyMenu.bind(this);
+        this.createLevelMenu = this.createDifficultyMenu.bind(this);
 
         this.state = {show: <View></View>
             , customPairAmount: ''
@@ -99,6 +101,14 @@ export default class Menu extends React.Component {
                 </View>
             </TouchableOpacity>
         </View>);
+    }
+
+    createLevelMenu() {
+
+    }
+
+    createDifficultyMenu() {
+
     }
 
     createMainMenu() {
