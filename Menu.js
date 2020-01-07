@@ -46,6 +46,7 @@ export default class Menu extends React.Component {
 
     playDifficultyClicked() {
         console.log("play difficulty")
+        this.setState({show: this.createDifficultyMenu()});
     }
 
     endlessClicked(timetrial) {
@@ -160,7 +161,7 @@ export default class Menu extends React.Component {
                     <Text>Very hard (18 pairs)</Text>
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.stopPlaying()}>
+            <TouchableOpacity onPress={this.stopPlaying}>
                 <View style={styles.button}>
                     <Text>Back</Text>
                 </View>
