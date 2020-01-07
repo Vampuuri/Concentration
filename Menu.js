@@ -108,7 +108,36 @@ export default class Menu extends React.Component {
     }
 
     createDifficultyMenu() {
-
+        return (<View>
+            <View style={styles.titleContainer}>
+                <Text style={styles.titleText}>Choose difficulty</Text>
+            </View>
+            <TouchableOpacity onPress={() => this.playClicked(4)}>
+                <View style={styles.button}>
+                    <Text>Very Easy (4 pairs)</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.playClicked(6)}>
+                <View style={styles.button}>
+                    <Text>Easy (6 pairs)</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.playClicked(10)}>
+                <View style={styles.button}>
+                    <Text>Medium (10 pairs)</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.playClicked(15)}>
+                <View style={styles.button}>
+                    <Text>Hard (15 pairs)</Text>
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.playClicked(18)}>
+                <View style={styles.button}>
+                    <Text>Very hard (18 pairs)</Text>
+                </View>
+            </TouchableOpacity>
+            </View>);
     }
 
     createMainMenu() {
