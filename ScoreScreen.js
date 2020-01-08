@@ -3,34 +3,74 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class ScoreCounter extends React.Component {
     render() { 
+      if (this.props.endless) {
         return (
-            <View style={styles.container}>
-                <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>{this.props.win ? "You won!" : "Too bad!"}</Text>
-                </View>
-                {this.props.win ?
-                    <View style={styles.scoreContainer}>
-                        <Text>Your score was:</Text>
-                        <Text>{this.props.score}</Text>
-                    </View>
-                    :
-                    <View style={styles.scoreContainer}>
-                    {this.props.timer ?
-                        <Text>You ran out of time</Text>
-                        :
-                        <Text>You ran out of moves</Text>}
-                    </View>
-                }
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity onPress={this.props.stopPlaying}>
-                        <View style={styles.button}><Text>Stop playing</Text></View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this.props.reset}>
-                        <View style={styles.button}><Text>Try again</Text></View>
-                    </TouchableOpacity>
-                </View>
-            </View>
+          <View style={styles.container}>
+              <View style={styles.titleContainer}>
+              <Text style={styles.titleText}>{this.props.win ? "You won!" : "Too bad!"}</Text>
+              </View>
+                  <View style={styles.scoreContainer}>
+                      <Text>Your score:</Text>
+                      <Text>{this.props.score}</Text>
+                  </View>
+                  {this.props.win ?
+                  <View></View>
+                  :
+                  <View style={styles.scoreContainer}>
+                  {this.props.timer ?
+                      <Text>You ran out of time</Text>
+                      :
+                      <Text>You ran out of moves</Text>}
+                  </View>
+                  }
+              {this.props.win ?
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={this.props.stopPlaying}>
+                    <View style={styles.button}><Text>Stop playing</Text></View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.props.reset}>
+                    <View style={styles.button}><Text>Next level</Text></View>
+                </TouchableOpacity>
+              </View>
+              :
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={this.props.stopPlaying}>
+                    <View style={styles.button}><Text>Stop playing</Text></View>
+                </TouchableOpacity>
+              </View>
+              }
+          </View>
         );
+      } else {
+        return (
+          <View style={styles.container}>
+              <View style={styles.titleContainer}>
+              <Text style={styles.titleText}>{this.props.win ? "You won!" : "Too bad!"}</Text>
+              </View>
+              {this.props.win ?
+                  <View style={styles.scoreContainer}>
+                      <Text>Your score was:</Text>
+                      <Text>{this.props.score}</Text>
+                  </View>
+                  :
+                  <View style={styles.scoreContainer}>
+                  {this.props.timer ?
+                      <Text>You ran out of time</Text>
+                      :
+                      <Text>You ran out of moves</Text>}
+                  </View>
+              }
+              <View style={styles.buttonContainer}>
+                  <TouchableOpacity onPress={this.props.stopPlaying}>
+                      <View style={styles.button}><Text>Stop playing</Text></View>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={this.props.reset}>
+                      <View style={styles.button}><Text>Try again</Text></View>
+                  </TouchableOpacity>
+              </View>
+          </View>
+      );
+      }
     }
 }
 
