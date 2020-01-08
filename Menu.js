@@ -8,6 +8,7 @@ export default class Menu extends React.Component {
         super(props);
 
         this.playClicked = this.playClicked.bind(this);
+        this.playEndless = this.playEndless.bind(this);
         this.stopPlaying = this.stopPlaying.bind(this);
         this.createMainMenu = this.createMainMenu.bind(this);
         this.customGameClicked = this.customGameClicked.bind(this);
@@ -33,7 +34,25 @@ export default class Menu extends React.Component {
     playClicked(amountOfPairs) {
         this.setState({show: <ScoreCounter
             pairs={amountOfPairs}
-            stopPlaying={this.stopPlaying}/>});
+            stopPlaying={this.stopPlaying} />});
+    }
+
+    playEndless(timetrial) {
+        if (timetrial) {
+            this.setState({show: <ScoreCounter
+                pairs={4}
+                stopPlaying={this.stopPlaying}
+                endless={true}
+                limitedTime={true}
+                time={60} />});
+        } else {
+            this.setState({show: <ScoreCounter
+                pairs={4}
+                stopPlaying={this.stopPlaying}
+                endless={true}
+                limitedMoves={true}
+                moves={30} />});
+        }
     }
 
     customGameClicked() {
@@ -72,11 +91,6 @@ export default class Menu extends React.Component {
         } else {
             var movelimitExists = moves !== NaN && moves > 0;
             var timelimitExists = time !== NaN && time > 0;
-
-            console.log(movelimitExists)
-            console.log(moves)
-            console.log(timelimitExists)
-            console.log(time)
 
             this.setState({show: <ScoreCounter
                 pairs={pairs}
