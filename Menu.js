@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Image } from 'react-native';
 import ScoreCounter from './ScoreCounter';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -100,6 +100,7 @@ export default class Menu extends React.Component {
     createCustomGameMenu() {
         return (<View>
             <View style={styles.titleContainer}>
+                <Image source={require('./assets/title.png')} style={{marginBottom: 30}} />
                 <Text style={styles.titleText}>Create custom game</Text>
             </View>
             <Text>Amount of pairs (4 - 18)</Text>
@@ -118,21 +119,24 @@ export default class Menu extends React.Component {
                 onChange={(input) => this.setState({customTimeLimit: input.nativeEvent.text})}
                 style={styles.customInput}/>
             <Text>Leave limits empty or zero for no limits!</Text>
-            <TouchableOpacity onPress={this.checkPairInput}>
-                <View style={styles.button}>
-                    <Text>Play</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.stopPlaying}>
-                <View style={styles.button}>
-                    <Text>Back</Text>
-                </View>
-            </TouchableOpacity>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <TouchableOpacity onPress={this.checkPairInput}>
+                    <View style={styles.button}>
+                        <Text>Play</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.stopPlaying}>
+                    <View style={styles.button}>
+                        <Text>Back</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
         </View>);
     }
 
     createEndlessTimedScreen() {
         return (<View>
+            <Image source={require('./assets/title.png')} style={{marginBottom: 30}} />
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Endless (time)</Text>
             </View>
@@ -141,21 +145,24 @@ export default class Menu extends React.Component {
             <Text>Beating level gives you XX more seconds.</Text>
             <Text>The game ends when you run out of time.</Text>
             <Text>Your current highscore: </Text>
-            <TouchableOpacity onPress={() => this.playClicked(6)}>
-                <View style={styles.button}>
-                    <Text>Play</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.stopPlaying}>
-                <View style={styles.button}>
-                    <Text>Back</Text>
-                </View>
-            </TouchableOpacity>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <TouchableOpacity onPress={() => this.playClicked(6)}>
+                    <View style={styles.button}>
+                        <Text>Play</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.stopPlaying}>
+                    <View style={styles.button}>
+                        <Text>Back</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
         </View>);
     }
 
     createEndlessMoveScreen() {
         return (<View>
+            <Image source={require('./assets/title.png')} style={{marginBottom: 30}} />
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Endless (moves)</Text>
             </View>
@@ -164,16 +171,18 @@ export default class Menu extends React.Component {
             <Text>Beating level gives you XX more moves.</Text>
             <Text>The game ends when you run out of moves.</Text>
             <Text>Your current highscore: </Text>
-            <TouchableOpacity onPress={() => this.playClicked(6)}>
-                <View style={styles.button}>
-                    <Text>Play</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.stopPlaying}>
-                <View style={styles.button}>
-                    <Text>Back</Text>
-                </View>
-            </TouchableOpacity>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <TouchableOpacity onPress={() => this.playClicked(6)}>
+                    <View style={styles.button}>
+                        <Text>Play</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.stopPlaying}>
+                    <View style={styles.button}>
+                        <Text>Back</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
         </View>);
     }
 
@@ -184,76 +193,79 @@ export default class Menu extends React.Component {
     createDifficultyMenu() {
         return (<View>
             <View style={styles.titleContainer}>
+                <Image source={require('./assets/title.png')} style={{marginBottom: 30}} />
                 <Text style={styles.titleText}>Choose difficulty</Text>
             </View>
-            <TouchableOpacity onPress={() => this.playClicked(4)}>
-                <View style={styles.button}>
-                    <Text>Very Easy (4 pairs)</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.playClicked(6)}>
-                <View style={styles.button}>
-                    <Text>Easy (6 pairs)</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.playClicked(10)}>
-                <View style={styles.button}>
-                    <Text>Medium (10 pairs)</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.playClicked(15)}>
-                <View style={styles.button}>
-                    <Text>Hard (15 pairs)</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.playClicked(18)}>
-                <View style={styles.button}>
-                    <Text>Very hard (18 pairs)</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.stopPlaying}>
-                <View style={styles.button}>
-                    <Text>Back</Text>
-                </View>
-            </TouchableOpacity>
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <TouchableOpacity onPress={() => this.playClicked(4)}>
+                    <View style={styles.button}>
+                        <Text>Very Easy (4 pairs)</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.playClicked(6)}>
+                    <View style={styles.button}>
+                        <Text>Easy (6 pairs)</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.playClicked(10)}>
+                    <View style={styles.button}>
+                        <Text>Medium (10 pairs)</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.playClicked(15)}>
+                    <View style={styles.button}>
+                        <Text>Hard (15 pairs)</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.playClicked(18)}>
+                    <View style={styles.button}>
+                        <Text>Very hard (18 pairs)</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.stopPlaying}>
+                    <View style={styles.button}>
+                        <Text>Back</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
             </View>);
     }
 
     createMainMenu() {
         return (<View>
-            <View style={styles.titleContainer}>
-                <Text style={styles.titleText}>Concentration</Text>
+            <Image source={require('./assets/title.png')} style={{marginBottom: 30}} />
+            <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <TouchableOpacity onPress={this.levelsClicked}>
+                    <View style={styles.button}>
+                        <Text>Levels</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.playDifficultyClicked}>
+                    <View style={styles.button}>
+                        <Text>Play difficulty</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.endlessClicked(true)}>
+                    <View style={styles.button}>
+                        <Text>Endless (time)</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.endlessClicked(false)}>
+                    <View style={styles.button}>
+                        <Text>Endless (moves)</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.customGameClicked}>
+                    <View style={styles.button}>
+                        <Text>Custom game</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.highscoresClicked}>
+                    <View style={styles.button}>
+                        <Text>Highscores</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={this.levelsClicked}>
-                <View style={styles.button}>
-                    <Text>Levels</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.playDifficultyClicked}>
-                <View style={styles.button}>
-                    <Text>Play difficulty</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.endlessClicked(true)}>
-                <View style={styles.button}>
-                    <Text>Endless (time)</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.endlessClicked(false)}>
-                <View style={styles.button}>
-                    <Text>Endless (moves)</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.customGameClicked}>
-                <View style={styles.button}>
-                    <Text>Custom game</Text>
-                </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.highscoresClicked}>
-                <View style={styles.button}>
-                    <Text>Highscores</Text>
-                </View>
-            </TouchableOpacity>
             </View>);
     }
 
@@ -276,13 +288,13 @@ export default class Menu extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: 'stretch',
+      alignItems: 'center',
       flexDirection: 'column',
       justifyContent: 'center'
     },
     titleContainer: {
         alignItems: 'center',
-        padding: 30,
+        paddingBottom: 10,
       },
       titleText: {
         fontSize:20,
@@ -297,12 +309,16 @@ const styles = StyleSheet.create({
       },
       button: {
         alignItems: 'center',
-        backgroundColor: 'lightgrey',
+        backgroundColor: 'rgb(255, 227, 135)',
         padding: 5,
+        borderRadius: 5,
         margin: 2,
+        width: 150,
       },
       customInput: {
         borderColor: 'black',
+        backgroundColor: 'rgb(255, 227, 135)',
+        borderRadius: 5,
         borderWidth: 1,
         marginBottom: 3,
       }

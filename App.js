@@ -1,13 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import Menu from './Menu';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Menu/>
-      </View>
+      <ImageBackground source={require('./assets/background.png')} style={{width: '100%', height: '100%'}}>
+        <View style={styles.container}>
+          <Menu/>
+        </View>
+        </ImageBackground>
     );
   }
 }
@@ -15,7 +17,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
