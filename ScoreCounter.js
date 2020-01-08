@@ -10,6 +10,7 @@ export default class ScoreCounter extends React.Component {
         this.matchingSuccessful = this.matchingSuccessful.bind(this);
         this.matchingFailed = this.matchingFailed.bind(this);
         this.reset = this.reset.bind(this);
+        this.endlessReset = this.endlessReset.bind(this);
         this.checkWin = this.checkWin.bind(this);
 
         this.state = {pairs: this.props.pairs
@@ -104,6 +105,10 @@ export default class ScoreCounter extends React.Component {
             , resetBoard: true
             , win: false
             , gameOver: false}, () => this.setState({resetBoard: false}, this.componentDidMount))
+    }
+
+    endlessReset() {
+
     }
 
     render() { 
