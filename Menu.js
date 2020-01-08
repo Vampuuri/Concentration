@@ -145,13 +145,13 @@ export default class Menu extends React.Component {
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Endless (time)</Text>
             </View>
-            <Text>You will start with XX seconds.</Text>
+            <Text>You will start with 60 seconds.</Text>
             <Text>After every level difficulty will rise.</Text>
-            <Text>Beating level gives you XX more seconds.</Text>
+            <Text>Winning level gives you 45 more seconds.</Text>
             <Text>The game ends when you run out of time.</Text>
             <Text>Your current highscore: </Text>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <TouchableOpacity onPress={() => this.playClicked(6)}>
+                <TouchableOpacity onPress={() => this.playEndless(true)}>
                     <View style={styles.button}>
                         <Text>Play</Text>
                     </View>
@@ -171,13 +171,13 @@ export default class Menu extends React.Component {
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>Endless (moves)</Text>
             </View>
-            <Text>You will start with XX moves.</Text>
+            <Text>You will start with 30 moves.</Text>
             <Text>After every level difficulty will rise.</Text>
-            <Text>Beating level gives you XX more moves.</Text>
+            <Text>Winning level gives you 20 more moves.</Text>
             <Text>The game ends when you run out of moves.</Text>
             <Text>Your current highscore: </Text>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <TouchableOpacity onPress={() => this.playClicked(6)}>
+                <TouchableOpacity onPress={() => this.playEndless(false)}>
                     <View style={styles.button}>
                         <Text>Play</Text>
                     </View>
