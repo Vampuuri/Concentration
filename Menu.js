@@ -15,7 +15,6 @@ export default class Menu extends React.Component {
         this.checkPairInput = this.checkPairInput.bind(this);
         this.createDifficultyMenu = this.createDifficultyMenu.bind(this);
         this.createLevelMenu = this.createDifficultyMenu.bind(this);
-        this.levelsClicked = this.levelsClicked.bind(this);
         this.playDifficultyClicked = this.playDifficultyClicked.bind(this);
         this.endlessClicked = this.endlessClicked.bind(this);
         this.createEndlessMoveScreen = this.createEndlessMoveScreen.bind(this);
@@ -42,10 +41,6 @@ export default class Menu extends React.Component {
         this.setState({show: this.createCustomGameMenu()});
     }
 
-    levelsClicked() {
-        console.log("levels")
-    }
-
     playDifficultyClicked() {
         console.log("play difficulty")
         this.setState({show: this.createDifficultyMenu()});
@@ -59,10 +54,6 @@ export default class Menu extends React.Component {
             console.log("endless: move restrictions")
             this.setState({show: this.createEndlessMoveScreen()});
         }
-    }
-
-    highscoresClicked() {
-        console.log("highscores")
     }
 
     checkPairInput() {
@@ -235,14 +226,9 @@ export default class Menu extends React.Component {
         return (<View>
             <Image source={require('./assets/title.png')} style={{marginBottom: 30}} />
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <TouchableOpacity onPress={this.levelsClicked}>
-                    <View style={styles.button}>
-                        <Text>Levels</Text>
-                    </View>
-                </TouchableOpacity>
                 <TouchableOpacity onPress={this.playDifficultyClicked}>
                     <View style={styles.button}>
-                        <Text>Play difficulty</Text>
+                        <Text>Play</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => this.endlessClicked(true)}>
@@ -258,11 +244,6 @@ export default class Menu extends React.Component {
                 <TouchableOpacity onPress={this.customGameClicked}>
                     <View style={styles.button}>
                         <Text>Custom game</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={this.highscoresClicked}>
-                    <View style={styles.button}>
-                        <Text>Highscores</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -290,7 +271,7 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       flexDirection: 'column',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     titleContainer: {
         alignItems: 'center',
@@ -298,6 +279,7 @@ const styles = StyleSheet.create({
       },
       titleText: {
         fontSize:20,
+        color: 'rgb(255, 227, 135)',
       },
       scoreContainer: {
         alignItems: 'center',
@@ -314,6 +296,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         margin: 2,
         width: 150,
+        color: 'black'
       },
       customInput: {
         borderColor: 'black',
