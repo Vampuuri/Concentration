@@ -20,6 +20,7 @@ export default class Menu extends React.Component {
         this.endlessClicked = this.endlessClicked.bind(this);
         this.createEndlessMoveScreen = this.createEndlessMoveScreen.bind(this);
         this.createEndlessTimedScreen = this.createEndlessTimedScreen.bind(this);
+        this.fetchHighscores = this.fetchHighscores.bind(this);
 
         this.state = {show: <View></View>
             , customPairAmount: ''
@@ -36,6 +37,11 @@ export default class Menu extends React.Component {
 
     componentDidMount() {
         this.setState({show: this.createMainMenu()})
+        this.fetchHighscores();
+    }
+
+    fetchHighscores() {
+
     }
 
     playClicked(amountOfPairs) {
@@ -156,7 +162,7 @@ export default class Menu extends React.Component {
             <Text>After every level difficulty will rise.</Text>
             <Text>Winning level gives you 45 more seconds.</Text>
             <Text>The game ends when you run out of time.</Text>
-            <Text>Your current highscore: </Text>
+            <Text>Your current highscore: {this.state.highscoreEndlessTimed}</Text>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <TouchableOpacity onPress={() => this.playEndless(true)}>
                     <View style={styles.button}>
@@ -182,7 +188,7 @@ export default class Menu extends React.Component {
             <Text>After every level difficulty will rise.</Text>
             <Text>Winning level gives you 20 more moves.</Text>
             <Text>The game ends when you run out of moves.</Text>
-            <Text>Your current highscore: </Text>
+            <Text>Your current highscore: {this.state.highscoreEndlessMoves}</Text>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <TouchableOpacity onPress={() => this.playEndless(false)}>
                     <View style={styles.button}>
@@ -211,29 +217,34 @@ export default class Menu extends React.Component {
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <TouchableOpacity onPress={() => this.playClicked(4)}>
                     <View style={styles.button}>
-                        <Text>Very Easy (4 pairs)</Text>
+                        <Text>Very Easy</Text>
                     </View>
                 </TouchableOpacity>
+                <Text style={styles.highscoreText}>Highscore: {this.state.highscoreVeryEasy}</Text>
                 <TouchableOpacity onPress={() => this.playClicked(6)}>
                     <View style={styles.button}>
-                        <Text>Easy (6 pairs)</Text>
+                        <Text>Easy</Text>
                     </View>
                 </TouchableOpacity>
+                <Text style={styles.highscoreText}>Highscore: {this.state.highscoreEasy}</Text>
                 <TouchableOpacity onPress={() => this.playClicked(10)}>
                     <View style={styles.button}>
-                        <Text>Medium (10 pairs)</Text>
+                        <Text>Medium</Text>
                     </View>
                 </TouchableOpacity>
+                <Text style={styles.highscoreText}>Highscore: {this.state.highscoreMedium}</Text>
                 <TouchableOpacity onPress={() => this.playClicked(15)}>
                     <View style={styles.button}>
-                        <Text>Hard (15 pairs)</Text>
+                        <Text>Hard</Text>
                     </View>
                 </TouchableOpacity>
+                <Text style={styles.highscoreText}>Highscore: {this.state.highscoreHard}</Text>
                 <TouchableOpacity onPress={() => this.playClicked(18)}>
                     <View style={styles.button}>
-                        <Text>Very hard (18 pairs)</Text>
+                        <Text>Very hard</Text>
                     </View>
                 </TouchableOpacity>
+                <Text style={styles.highscoreText}>Highscore: {this.state.highscoreVeryHard}</Text>
                 <TouchableOpacity onPress={this.stopPlaying}>
                     <View style={styles.button}>
                         <Text>Back</Text>
@@ -325,6 +336,10 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         marginBottom: 3,
+      },
+      highscoreText: {
+        paddingBottom: 7,
+        fontSize: 10,
       }
   });
   
