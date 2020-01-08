@@ -20,7 +20,8 @@ export default class ScoreCounter extends React.Component {
             , movesLeft: this.props.moves
             , timeLeft: this.props.time
             , resetBoard: false
-            , win: false}
+            , win: false
+            , oldHighscore: this.props.oldHighscore}
 
         this.interval = null;
     }
@@ -96,6 +97,10 @@ export default class ScoreCounter extends React.Component {
     }
 
     reset() {
+        if (this.state.oldHighscore < this.state.score) {
+            this.setState({oldHighscore: this.state.score});
+        }
+
         this.setState({pairs: this.state.pairs
             , matchedPairs: 0
             , score: 0
@@ -108,6 +113,10 @@ export default class ScoreCounter extends React.Component {
     }
 
     endlessReset() {
+        if (this.state.oldHighscore < this.state.score) {
+            this.setState({oldHighscore: this.state.score});
+        }
+
         var pairs = this.state.pairs;
 
         if (pairs < 18) {
@@ -142,20 +151,25 @@ export default class ScoreCounter extends React.Component {
                     <ScoreScreen 
                         win={this.state.win}
                         score={this.state.score}
+                        oldHighscore={this.state.oldHighscore}
                         timer={this.state.timeLeft === 0}
                         reset={() => this.endlessReset()}
                         stopPlaying={() => this.props.stopPlaying()}
-                        endless={true} />
+                        endless={true}
+                        gamemode={this.props.gamemode} />
                     </View>
                     :
                     <View style={styles.container}>
                     <ScoreScreen 
                         win={this.state.win}
                         score={this.state.score}
+                        oldHighscore={this.state.oldHighscore}
                         timer={this.state.timeLeft === 0}
                         reset={() => this.reset()}
                         stopPlaying={() => this.props.stopPlaying()}
-                        endless={false} />
+                        endless={false}
+                        custom={this.props.custom}
+                        gamemode={this.props.gamemode} />
                     </View> 
                 :
                 <View style={styles.container}>

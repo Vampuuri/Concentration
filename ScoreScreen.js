@@ -1,7 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
 
 export default class ScoreCounter extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.saveNewHighscore = this.saveNewHighscore.bind(this);
+
+        if (!this.props.custom && this.props.oldHighscore < this.props.score) {
+            this.saveNewHighscore();
+        }
+    }
+
+    saveNewHighscore() {
+        console.log('saving new highscore')
+          try {
+              AsyncStorage.setItem(this.props.gamemode, this.props.score.toString());
+          } catch (error) {
+              console.log('error saving data')
+          }
+    }
+
     render() { 
       if (this.props.endless) {
         return (
@@ -18,9 +37,9 @@ export default class ScoreCounter extends React.Component {
                   :
                   <View style={styles.scoreContainer}>
                   {this.props.timer ?
-                      <Text>You ran out of time</Text>
+                      <Text>You ran out of time!</Text>
                       :
-                      <Text>You ran out of moves</Text>}
+                      <Text>You ran out of moves!</Text>}
                   </View>
                   }
               {this.props.win ?

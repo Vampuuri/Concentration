@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, Image, AsyncStorage } from 'react-native';
 import ScoreCounter from './ScoreCounter';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -41,13 +41,57 @@ export default class Menu extends React.Component {
     }
 
     fetchHighscores() {
+        console.log('fetching highscores')
 
+        AsyncStorage.clear()
+ 
+        try {
+            AsyncStorage.getItem('highscoreVeryEasy').then((item) => {
+                if (item !== null) {
+                    this.setState({highscoreVeryEasy: parseInt(item)});
+                }
+            });
+            AsyncStorage.getItem('highscoreEasy').then((item) => {
+                if (item !== null) {
+                    this.setState({highscoreEasy: parseInt(item)});
+                }
+            });
+            AsyncStorage.getItem('highscoreMedium').then((item) => {
+                if (item !== null) {
+                    this.setState({highscoreMedium: parseInt(item)});
+                }
+            });
+            AsyncStorage.getItem('highscoreHard').then((item) => {
+                if (item !== null) {
+                    this.setState({highscoreHard: parseInt(item)});
+                }
+            });
+            AsyncStorage.getItem('highscoreVeryHard').then((item) => {
+                if (item !== null) {
+                    this.setState({highscoreVeryHard: parseInt(item)});
+                }
+            });
+            AsyncStorage.getItem('highscoreEndlessTimed').then((item) => {
+                if (item !== null) {
+                    this.setState({highscoreEndlessTimed: parseInt(item)});
+                }
+            });
+            AsyncStorage.getItem('highscoreEndlessMoves').then((item) => {
+                if (item !== null) {
+                    this.setState({highscoreMedium: parseInt(item)});
+                }
+            });
+          } catch (error) {
+            console.log(error)
+          }
     }
 
-    playClicked(amountOfPairs) {
+    playClicked(amountOfPairs, gamemode, oldHighscore) {
         this.setState({show: <ScoreCounter
             pairs={amountOfPairs}
-            stopPlaying={this.stopPlaying} />});
+            stopPlaying={this.stopPlaying}
+            gamemode={gamemode}
+            oldHighscore={oldHighscore} />});
     }
 
     playEndless(timetrial) {
@@ -57,14 +101,18 @@ export default class Menu extends React.Component {
                 stopPlaying={this.stopPlaying}
                 endless={true}
                 limitedTime={true}
-                time={60} />});
+                time={60}
+                gamemode={'highscoreEndlessTimed'}
+                oldHighscore={this.state.highscoreEndlessTimed} />});
         } else {
             this.setState({show: <ScoreCounter
                 pairs={4}
                 stopPlaying={this.stopPlaying}
                 endless={true}
                 limitedMoves={true}
-                moves={30} />});
+                moves={30}
+                gamemode={'highscoreEndlessMoves'}
+                oldHighscore={this.state.highscoreEndlessMoves} />});
         }
     }
 
@@ -111,7 +159,8 @@ export default class Menu extends React.Component {
                 limitedMoves={movelimitExists}
                 moves={moves}
                 limitedTime={timelimitExists}
-                time={time}/>});
+                time={time}
+                custom={true}/>});
         }
     }
 
@@ -215,31 +264,31 @@ export default class Menu extends React.Component {
                 <Text style={styles.titleText}>Choose difficulty</Text>
             </View>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                <TouchableOpacity onPress={() => this.playClicked(4)}>
+                <TouchableOpacity onPress={() => this.playClicked(4, 'highscoreVeryEasy', this.state.highscoreVeryEasy)}>
                     <View style={styles.button}>
                         <Text>Very Easy</Text>
                     </View>
                 </TouchableOpacity>
                 <Text style={styles.highscoreText}>Highscore: {this.state.highscoreVeryEasy}</Text>
-                <TouchableOpacity onPress={() => this.playClicked(6)}>
+                <TouchableOpacity onPress={() => this.playClicked(6, 'highscoreEasy', this.state.highscoreEasy)}>
                     <View style={styles.button}>
                         <Text>Easy</Text>
                     </View>
                 </TouchableOpacity>
                 <Text style={styles.highscoreText}>Highscore: {this.state.highscoreEasy}</Text>
-                <TouchableOpacity onPress={() => this.playClicked(10)}>
+                <TouchableOpacity onPress={() => this.playClicked(10, 'highscoreMedium', this.state.highscoreMedium)}>
                     <View style={styles.button}>
                         <Text>Medium</Text>
                     </View>
                 </TouchableOpacity>
                 <Text style={styles.highscoreText}>Highscore: {this.state.highscoreMedium}</Text>
-                <TouchableOpacity onPress={() => this.playClicked(15)}>
+                <TouchableOpacity onPress={() => this.playClicked(15, 'highscoreHard', this.state.highscoreHard)}>
                     <View style={styles.button}>
                         <Text>Hard</Text>
                     </View>
                 </TouchableOpacity>
                 <Text style={styles.highscoreText}>Highscore: {this.state.highscoreHard}</Text>
-                <TouchableOpacity onPress={() => this.playClicked(18)}>
+                <TouchableOpacity onPress={() => this.playClicked(18, 'highscoreVeryHard', this.state.highscoreVeryHard)}>
                     <View style={styles.button}>
                         <Text>Very hard</Text>
                     </View>
@@ -287,6 +336,7 @@ export default class Menu extends React.Component {
             , customPairAmount: ''
             , customMoveLimit: ''
             , customTimeLimit: ''})
+        this.fetchHighscores();
     }
 
     render() { 
