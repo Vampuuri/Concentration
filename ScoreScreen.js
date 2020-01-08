@@ -7,7 +7,7 @@ export default class ScoreCounter extends React.Component {
 
         this.saveNewHighscore = this.saveNewHighscore.bind(this);
 
-        if (!this.props.custom && this.props.oldHighscore < this.props.score) {
+        if (!this.props.custom && this.props.win && this.props.oldHighscore < this.props.score) {
             this.saveNewHighscore();
         }
     }
