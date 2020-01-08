@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     },
     titleText: {
       fontSize:20,
+      color: 'rgb(255, 227, 135)',
     },
     scoreContainer: {
       alignItems: 'center',
@@ -58,9 +59,11 @@ const styles = StyleSheet.create({
     },
     button: {
       alignItems: 'center',
-      backgroundColor: 'lightgrey',
+      backgroundColor: 'rgb(255, 227, 135)',
       padding: 5,
+      borderRadius: 5,
       margin: 2,
+      width: 150,
     }
   });
   
