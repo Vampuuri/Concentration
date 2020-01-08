@@ -118,7 +118,7 @@ export default class ScoreCounter extends React.Component {
             this.setState({pairs: pairs
                 , matchedPairs: 0
                 , combo: 10
-                , timeLeft: this.state.limitedTime + 40
+                , timeLeft: this.state.timeLeft + 45
                 , resetBoard: true
                 , win: false
                 , gameOver: false}, () => this.setState({resetBoard: false}, this.componentDidMount))
@@ -126,7 +126,7 @@ export default class ScoreCounter extends React.Component {
             this.setState({pairs: pairs
                 , matchedPairs: 0
                 , combo: 10
-                , movesLeft: this.props.moves + 30
+                , movesLeft: this.props.moves + 20
                 , resetBoard: true
                 , win: false
                 , gameOver: false}, () => this.setState({resetBoard: false}, this.componentDidMount))
@@ -137,14 +137,26 @@ export default class ScoreCounter extends React.Component {
         return (
             <View>
             {this.state.win || this.state.gameOver ?
-                <View style={styles.container}>
-                <ScoreScreen 
-                    win={this.state.win}
-                    score={this.state.score}
-                    timer={this.state.timeLeft === 0}
-                    reset={() => this.reset()}
-                    stopPlaying={() => this.props.stopPlaying()}/>
-                </View> 
+                this.props.endless ?
+                    <View style={styles.container}>
+                    <ScoreScreen 
+                        win={this.state.win}
+                        score={this.state.score}
+                        timer={this.state.timeLeft === 0}
+                        reset={() => this.endlessReset()}
+                        stopPlaying={() => this.props.stopPlaying()}
+                        endless={true} />
+                    </View>
+                    :
+                    <View style={styles.container}>
+                    <ScoreScreen 
+                        win={this.state.win}
+                        score={this.state.score}
+                        timer={this.state.timeLeft === 0}
+                        reset={() => this.reset()}
+                        stopPlaying={() => this.props.stopPlaying()}
+                        endless={false} />
+                    </View> 
                 :
                 <View style={styles.container}>
                 <View style={styles.scorecontainer}>
