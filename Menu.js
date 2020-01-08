@@ -21,6 +21,7 @@ export default class Menu extends React.Component {
         this.createEndlessMoveScreen = this.createEndlessMoveScreen.bind(this);
         this.createEndlessTimedScreen = this.createEndlessTimedScreen.bind(this);
         this.fetchHighscores = this.fetchHighscores.bind(this);
+        this.resetHighscoresClicked = this.resetHighscoresClicked.bind(this);
 
         this.state = {show: <View></View>
             , customPairAmount: ''
@@ -42,8 +43,6 @@ export default class Menu extends React.Component {
 
     fetchHighscores() {
         console.log('fetching highscores')
-
-        AsyncStorage.clear()
  
         try {
             AsyncStorage.getItem('highscoreVeryEasy').then((item) => {
@@ -134,6 +133,33 @@ export default class Menu extends React.Component {
             console.log("endless: move restrictions")
             this.setState({show: this.createEndlessMoveScreen()});
         }
+    }
+
+    resetHighscoresClicked() {
+        Alert.alert(
+            'Deleting highscores',
+            'Are you sure you want to delete ALL highscore data?',
+            [
+              {text: 'Yes', onPress: () => {
+                  AsyncStorage.multiRemove(['highscoreVeryEasy'
+                  , 'highscoreEasy'
+                  , 'highscoreMedium'
+                  , 'highscoreHard'
+                  , 'highscoreVeryHard'
+                  , 'highscoreEndlessTimed'
+                  , 'highscoreEndlessMoves'])
+                  this.setState({highscoreVeryEasy: 0
+                    , highscoreEasy: 0
+                    , highscoreMedium: 0
+                    , highscoreHard: 0
+                    , highscoreVeryHard: 0
+                    , highscoreEndlessTimed: 0
+                    , highscoreEndlessMoves: 0})
+                }},
+              {text: 'No'}
+            ],
+            {cancelable: false},
+          );
     }
 
     checkPairInput() {
@@ -325,6 +351,11 @@ export default class Menu extends React.Component {
                 <TouchableOpacity onPress={this.customGameClicked}>
                     <View style={styles.button}>
                         <Text>Custom game</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.resetHighscoresClicked}>
+                    <View style={styles.button}>
+                        <Text>Delete Highscores</Text>
                     </View>
                 </TouchableOpacity>
             </View>
