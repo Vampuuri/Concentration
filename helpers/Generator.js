@@ -1,13 +1,13 @@
-const possibleValues = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+var differentCardSymbols = 24;
 
 export function generateValues(numberOfPairs) {
     var values = [];
 
     while (values.length < numberOfPairs) {
-        var character = possibleValues.charAt(Math.floor(Math.random()*possibleValues.length))
+        var value = Math.floor(Math.random()*differentCardSymbols);
 
-        if (!itemIsInArray(values, character)) {
-            values.push(character)
+        if (!itemIsInArray(values, value)) {
+            values.push(value)
         }
     }
 
