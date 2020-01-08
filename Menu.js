@@ -24,7 +24,14 @@ export default class Menu extends React.Component {
         this.state = {show: <View></View>
             , customPairAmount: ''
             , customMoveLimit: ''
-            , customTimeLimit: ''};
+            , customTimeLimit: ''
+            , highscoreVeryEasy: 0
+            , highscoreEasy: 0
+            , highscoreMedium: 0
+            , highscoreHard: 0
+            , highscoreVeryHard: 0
+            , highscoreEndlessTimed: 0
+            , highscoreEndlessMoves: 0};
     }
 
     componentDidMount() {
