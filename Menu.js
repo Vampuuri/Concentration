@@ -261,7 +261,7 @@ export default class Menu extends React.Component {
             </View>
             <Text>You will start with 30 moves.</Text>
             <Text>After every level difficulty will rise.</Text>
-            <Text>Winning level gives you 20 more moves.</Text>
+            <Text>Winning level gives you 30 more moves.</Text>
             <Text>The game ends when you run out of moves.</Text>
             <Text>Your current highscore: {this.state.highscoreEndlessMoves}</Text>
             <View style={{justifyContent: 'center', alignItems: 'center'}}>

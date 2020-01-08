@@ -151,7 +151,7 @@ export default class ScoreCounter extends React.Component {
             this.setState({pairs: pairs
                 , matchedPairs: 0
                 , combo: 10
-                , movesLeft: this.props.moves + 20
+                , movesLeft: this.props.moves + 30
                 , resetBoard: true
                 , win: false
                 , gameOver: false}, () => this.setState({resetBoard: false}, this.componentDidMount))
