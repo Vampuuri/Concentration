@@ -108,7 +108,23 @@ export default class ScoreCounter extends React.Component {
     }
 
     endlessReset() {
-
+        if (this.props.limitedTime) {
+            this.setState({pairs: this.state.pairs + 1
+                , matchedPairs: 0
+                , combo: 10
+                , timeLeft: this.state.limitedTime + 30
+                , resetBoard: true
+                , win: false
+                , gameOver: false}, () => this.setState({resetBoard: false}, this.componentDidMount))
+        } else {
+            this.setState({pairs: this.state.pairs + 1
+                , matchedPairs: 0
+                , combo: 10
+                , movesLeft: this.props.moves + 20
+                , resetBoard: true
+                , win: false
+                , gameOver: false}, () => this.setState({resetBoard: false}, this.componentDidMount))
+        }
     }
 
     render() { 
