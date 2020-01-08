@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import Board from './gamecomponents/Board'
 import ScoreScreen from './ScoreScreen'
 
@@ -12,6 +12,7 @@ export default class ScoreCounter extends React.Component {
         this.reset = this.reset.bind(this);
         this.endlessReset = this.endlessReset.bind(this);
         this.checkWin = this.checkWin.bind(this);
+        this.giveup = this.giveup.bind(this);
 
         this.state = {pairs: this.props.pairs
             , matchedPairs: 0
@@ -158,6 +159,14 @@ export default class ScoreCounter extends React.Component {
         }
     }
 
+    giveup() {
+        if (this.props.limitedTime) {
+            clearInterval(this.interval);
+        }
+
+        this.props.stopPlaying();
+    }
+
     render() { 
         return (
             <View>
@@ -198,12 +207,13 @@ export default class ScoreCounter extends React.Component {
                     resetScoring={this.reset}
                     resetBoard={this.state.resetBoard}/>
                 {this.props.limitedMoves || this.props.limitedTime ? 
-                    <View style={styles.scorecontainer}>
+                    <View style={{alignItems: 'center', paddingTop:10}}>
                         {this.props.limitedTime ? <Text>Time left: {this.state.timeLeft}</Text> : <View></View>}
                         {this.props.limitedMoves ? <Text>Moves left: {this.state.movesLeft}</Text> : <View></View>}
                     </View>
                     :
                     <View></View>}
+                <TouchableOpacity onPress={this.giveup}><View style={styles.button}><Text>Give up</Text></View></TouchableOpacity>
                 </View>
             }
             </View>
@@ -213,17 +223,26 @@ export default class ScoreCounter extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      alignItems: 'center',
-      flexDirection: 'column',
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: 'column',
     },
     scorecontainer: {
         alignItems: 'center',
-        padding: 50,
-      },
-      score: {
+        paddingTop: 50,
+    },
+    score: {
         fontSize:20,
-      },
+    },
+    button: {
+        alignItems: 'center',
+        backgroundColor: 'rgb(255, 227, 135)',
+        padding: 5,
+        borderRadius: 5,
+        margin: 2,
+        width: 150,
+        color: 'black'
+    },
 
   });
   
