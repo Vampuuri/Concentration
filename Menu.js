@@ -141,13 +141,17 @@ export default class Menu extends React.Component {
             'Are you sure you want to delete ALL highscore data?',
             [
               {text: 'Yes', onPress: () => {
-                  AsyncStorage.multiRemove(['highscoreVeryEasy'
-                  , 'highscoreEasy'
-                  , 'highscoreMedium'
-                  , 'highscoreHard'
-                  , 'highscoreVeryHard'
-                  , 'highscoreEndlessTimed'
-                  , 'highscoreEndlessMoves'])
+                  try {
+                    AsyncStorage.multiRemove(['highscoreVeryEasy'
+                    , 'highscoreEasy'
+                    , 'highscoreMedium'
+                    , 'highscoreHard'
+                    , 'highscoreVeryHard'
+                    , 'highscoreEndlessTimed'
+                    , 'highscoreEndlessMoves'])
+                  } catch (error) {
+                      console.log('error deleting highscores')
+                  }
                   this.setState({highscoreVeryEasy: 0
                     , highscoreEasy: 0
                     , highscoreMedium: 0
