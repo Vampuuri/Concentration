@@ -34,6 +34,14 @@ export default class Board extends React.Component {
         }
     }
 
+    /**
+     * Checks flipped card's value.
+     * 
+     * It there was already flipped card, checks if the symbol match with earlier card.
+     * 
+     * @param {*} cardKey 
+     * @param {*} cardValue 
+     */
     receiveCardInfo(cardKey, cardValue) {
         console.log("card flipped")
 
@@ -73,6 +81,9 @@ export default class Board extends React.Component {
                 () => this.initializeInformation()))
     }
 
+    /**
+     * Gets needed information (dimensions, values of cards) from Generator.
+     */
     initializeInformation() {
         var pairs = this.props.pairs;
 
@@ -96,10 +107,15 @@ export default class Board extends React.Component {
         this.setState({pairs: pairs, values: values, rows: rows, cols: cols, invisible: invisible})
     }
 
+    /**
+     * Generates and returns boards.
+     */
     makeBoard() {
         var board = [];
 
         if (this.state.rows <= 3) {
+            // These formations have fixed rows and cols and every spot gets filled.
+
             keyCounter = 0;
 
             for (var i = 0; i < this.state.rows; i++) {
@@ -119,6 +135,9 @@ export default class Board extends React.Component {
                 board.push(<View key={i} style={styles.column}>{itemsInRow}</View>);
             }
         } else {
+            // Other formations have fixed, filled rows, but some cards go over these rows.
+            // The overflow cards must be divided evenly between the overflow rows.
+
             var goesOver = this.state.pairs - (this.state.cols * (this.state.rows - 2))/2;
             keyCounter = 0;
 

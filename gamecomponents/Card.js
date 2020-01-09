@@ -12,6 +12,12 @@ export default class Card extends React.Component {
         this.state = {active: false, invisible: false, enabled: true};
     }
 
+    /**
+     * Returns Image according symbol variable from props.
+     * 
+     * Require will not function with variables. Thats why the symbols must be
+     * generated like so.
+     */
     generateSymbolImage() {
         if (this.props.symbol === 0) {
             return (<Image source={require('../assets/cardimages/0.png')} />)
@@ -64,6 +70,11 @@ export default class Card extends React.Component {
         }
     }
 
+    /**
+     * Changes status by the props received from parent component.
+     * 
+     * @param newprops 
+     */
     componentWillReceiveProps(newprops) {
         if (newprops.refresh) {
             this.setState({invisible: newprops.invisible, enabled: newprops.enabled, active: false});
@@ -72,6 +83,11 @@ export default class Card extends React.Component {
         }
     }
 
+    /**
+     * Generates the card itself according to its status.
+     * 
+     * @param {*} active        Is card rightsideup
+     */
     generateCard(active) {
         if (this.state.invisible) {
             return(<View style={[styles.container, styles.invisible]}></View>);
@@ -86,7 +102,10 @@ export default class Card extends React.Component {
         }
     }
 
-    flipCard(event) {
+    /**
+     * Flips card right side up if it is enabled.
+     */
+    flipCard() {
         if (this.state.enabled) {
             this.setState({active: true});
             this.props.returnvalues(this.props.id, this.props.symbol);

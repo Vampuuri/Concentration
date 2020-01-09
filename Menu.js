@@ -15,7 +15,6 @@ export default class Menu extends React.Component {
         this.createCustomGameMenu = this.createCustomGameMenu.bind(this);
         this.checkPairInput = this.checkPairInput.bind(this);
         this.createDifficultyMenu = this.createDifficultyMenu.bind(this);
-        this.createLevelMenu = this.createDifficultyMenu.bind(this);
         this.playDifficultyClicked = this.playDifficultyClicked.bind(this);
         this.endlessClicked = this.endlessClicked.bind(this);
         this.createEndlessMoveScreen = this.createEndlessMoveScreen.bind(this);
@@ -41,6 +40,9 @@ export default class Menu extends React.Component {
         this.fetchHighscores();
     }
 
+    /**
+     * Fetches highscores from async storage.
+     */
     fetchHighscores() {
         console.log('fetching highscores')
  
@@ -85,6 +87,13 @@ export default class Menu extends React.Component {
           }
     }
 
+    /**
+     * Starts a normal game with no restrictions.
+     * 
+     * @param {*} amountOfPairs 
+     * @param {*} gamemode 
+     * @param {*} oldHighscore 
+     */
     playClicked(amountOfPairs, gamemode, oldHighscore) {
         this.setState({show: <ScoreCounter
             pairs={amountOfPairs}
@@ -93,6 +102,11 @@ export default class Menu extends React.Component {
             oldHighscore={oldHighscore} />});
     }
 
+    /**
+     * Starts an endless game, timed or move restricted.
+     * 
+     * @param {*} timetrial 
+     */
     playEndless(timetrial) {
         if (timetrial) {
             this.setState({show: <ScoreCounter
@@ -135,6 +149,9 @@ export default class Menu extends React.Component {
         }
     }
 
+    /**
+     * Alerts user, then removes scres from Async Storage and state.
+     */
     resetHighscoresClicked() {
         Alert.alert(
             'Deleting highscores',
@@ -166,6 +183,9 @@ export default class Menu extends React.Component {
           );
     }
 
+    /**
+     * Creates and starts a custom game.
+     */
     checkPairInput() {
         var pairs = parseInt(this.state.customPairAmount)
         var moves = parseInt(this.state.customMoveLimit)
@@ -283,10 +303,6 @@ export default class Menu extends React.Component {
         </View>);
     }
 
-    createLevelMenu() {
-
-    }
-
     createDifficultyMenu() {
         return (<View>
             <View style={styles.titleContainer}>
@@ -366,6 +382,9 @@ export default class Menu extends React.Component {
             </View>);
     }
 
+    /**
+     * Resets app back to main menu.
+     */
     stopPlaying() {
         this.setState({show: this.createMainMenu()
             , customPairAmount: ''

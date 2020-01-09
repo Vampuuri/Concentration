@@ -27,6 +27,9 @@ export default class ScoreCounter extends React.Component {
         this.interval = null;
     }
 
+    /**
+     * If there is time restriction, start timer.
+     */
     componentDidMount() {
         if (this.props.limitedTime) {
             this.interval = setInterval(() => {
@@ -40,6 +43,9 @@ export default class ScoreCounter extends React.Component {
         }
     }
 
+    /**
+     * Adds score and check if all cards were matched.
+     */
     matchingSuccessful() {
         console.log("match!");
         var score = this.state.score + this.state.combo;
@@ -55,6 +61,11 @@ export default class ScoreCounter extends React.Component {
         }
     }
 
+    /**
+     * Failed match reduces combo bonus points.
+     * 
+     * If limited moves, reduces move counter.
+     */
     matchingFailed() {
         console.log("not a match!");
         if (this.state.combo > 1) {
@@ -66,6 +77,15 @@ export default class ScoreCounter extends React.Component {
         }
     }
 
+    /**
+     * Checks if there was a win depending on game mode.
+     * 
+     * If gamemode is endless, no bonus points are given from remaining moves or time.
+     * 
+     * If there is limited time or moves, gives bonus points for remaining moves or time.
+     * 
+     * If there is no limits, the score will remain as is.
+     */
     checkWin() {
         if (this.props.endless) {
             if (this.props.limitedTime) {
@@ -113,6 +133,9 @@ export default class ScoreCounter extends React.Component {
         }
     }
 
+    /**
+     * Resets score and lets user play similar game again.
+     */
     reset() {
         if (this.state.oldHighscore < this.state.score) {
             this.setState({oldHighscore: this.state.score});
@@ -129,6 +152,10 @@ export default class ScoreCounter extends React.Component {
             , gameOver: false}, () => this.setState({resetBoard: false}, this.componentDidMount))
     }
 
+    /**
+     * Keeps the score between stages, escalates difficulty by adding more pairs,
+     * gives bonus moves or time for winning.
+     */
     endlessReset() {
         if (this.state.oldHighscore < this.state.score) {
             this.setState({oldHighscore: this.state.score});
@@ -159,6 +186,9 @@ export default class ScoreCounter extends React.Component {
         }
     }
 
+    /**
+     * If there is timer, stops it. Then returns to main menu.
+     */
     giveup() {
         if (this.props.limitedTime) {
             clearInterval(this.interval);

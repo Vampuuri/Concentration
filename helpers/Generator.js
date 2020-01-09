@@ -1,5 +1,12 @@
 var differentCardSymbols = 24;
 
+/**
+ * Generates an suffled array of paired integers between 0-23.
+ * 
+ * The integers refer to symbol pictures (../assets/cardimages/)
+ * 
+ * @param {*} numberOfPairs 
+ */
 export function generateValues(numberOfPairs) {
     var values = [];
 
@@ -17,6 +24,11 @@ export function generateValues(numberOfPairs) {
     return values;
 }
 
+/**
+ * Returns the amount of rows and cols according to the amount of card pairs.
+ * 
+ * @param {*} numberOfPairs 
+ */
 export function getBoardDimensions(numberOfPairs) {
     rows = 0;
     cols = 0;
@@ -38,6 +50,12 @@ export function getBoardDimensions(numberOfPairs) {
     return {rows: rows, cols: cols}
 }
 
+/**
+ * Finds out if searched value is in an array.
+ * 
+ * @param {*} array 
+ * @param {*} searched 
+ */
 function itemIsInArray(array, searched) {
     for (item of array) {
         if (item === searched) {
@@ -48,6 +66,11 @@ function itemIsInArray(array, searched) {
     return false;
 }
 
+/**
+ * Suffles and returns an array.
+ * 
+ * @param {*} arr 
+ */
 function shuffle(arr) {
     var i;
     var j;

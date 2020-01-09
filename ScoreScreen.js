@@ -8,10 +8,15 @@ export default class ScoreCounter extends React.Component {
         this.saveNewHighscore = this.saveNewHighscore.bind(this);
 
         if (!this.props.custom && this.props.win && this.props.oldHighscore < this.props.score) {
+            // Saves highscore, if game is not custom, levels was won and old highscore is lower
+            // than received score.
             this.saveNewHighscore();
         }
     }
 
+    /**
+     * Saves highscore to async storage.
+     */
     saveNewHighscore() {
         console.log('saving new highscore')
           try {
@@ -21,6 +26,11 @@ export default class ScoreCounter extends React.Component {
           }
     }
 
+    /**
+     * Renders the screen.
+     * 
+     * If the game is endless, generates a slightly different score screen.
+     */
     render() { 
       if (this.props.endless) {
         return (
