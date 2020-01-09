@@ -24,11 +24,11 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": "fi.tamk.esuppo",
+      "bundleIdentifier": "fi.tamk.concentration",
       "supportsTablet": true
     },
     "android": {
-      "package": "fi.tamk.esuppo"
+      "package": "fi.tamk.concentration"
     }
   }
 }
